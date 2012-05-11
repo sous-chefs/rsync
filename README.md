@@ -7,9 +7,19 @@ Requirements
 
 Attributes
 ==========
+* default[:rsync][:daemon] = "false"
+* default[:rsync][:rsyncd_conf] = "/etc/rsyncd.conf"
+* default[:rsync][:rsyncd_opts] = ""
+* default[:rsync][:rsynd_nice] = ""
+
+Set the node[:rsync][:daemon] = "true" to enable the rsync daemon.
+Other parameters are all default settings for rsync.  Please see
+/etc/defaults/rsync for details on each setting.
 
 Recipes
 =======
+* default.rb
+
 
 default
 -------
