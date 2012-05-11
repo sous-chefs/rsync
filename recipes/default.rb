@@ -18,3 +18,22 @@
 #
 
 package "rsync"
+
+template "#{node[:rsync][:rsyncd_conf]}" do
+  source "rsync_default.erb"
+  owner "root"
+  group "root"
+  mode 644
+  variables(
+    :daemon => node[:rsync][:daemon],
+    :rsyncd_conf => node[:rsync][:rsyncd_conf],
+    :rsyncd_opts => node[:rsync][:rsyncd_opts],
+    :rsync_nice => node[:rsync][:rsync_nice]
+  )
+end
+
+if node[:rsync][:daemon] == "true"
+  service "rsync" do
+    action [:enable, :start]
+  end
+end
