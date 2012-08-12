@@ -1,5 +1,7 @@
 Description
 ===========
+Rsync cookbook with rsyncd functionality 
+
 
 Requirements
 ============
@@ -26,9 +28,9 @@ Examples
 License and Author
 ==================
 
-Author:: AUTHOR_NAME
+Author:: Jesse Nelson <spheromak@gmail.com>
 
-Copyright:: YYYY, Opscode, Inc
+Copyright:: 2012, Opscode, Inc
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
