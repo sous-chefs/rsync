@@ -1,7 +1,8 @@
 Description
 ===========
-Rsync cookbook with rsyncd functionality 
+Rsync cookbook with rsyncd LWRP
 
+http://www.samba.org/ftp/rsync/rsyncd.conf.html
 
 Requirements
 ============
