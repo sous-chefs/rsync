@@ -39,4 +39,5 @@ attribute :transfer_logging, :kind_of =>  [ TrueClass, FalseClass ]
 # by default rsync sets no client timeout (lets client choose, but this is a trivial DOS) so we make a 10 minute one
 attribute :timeout, :kind_of => Fixnum, :default => 600
 attribute :dont_compress, :kind_of  =>  String
+attribute :lock_file, :kind_of => String
 
