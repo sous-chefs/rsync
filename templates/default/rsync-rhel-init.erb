@@ -46,16 +46,17 @@ function stop {
 
 case "$1" in
 start)
-  start()
+  start
 ;;
 stop)
-  stop()
+  stop
 ;;
 restart)
-  stop()
-  start()
+  stop
+  start
 ;;
-  status)
+status)
+  status rsyncd
 ;;
 *)
   echo "Usage: rsyncd {start|stop|restart|status}"

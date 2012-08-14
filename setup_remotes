@@ -3,7 +3,7 @@
 git remote add upstream git@github.com:spheromak/rsync-cookbook.git
 git checkout -b upstream 
 git fetch  upstream
-git branch --set-upstream  remotes/upstream/master
+git branch --set-upstream  upstream/master
 git checkout master
 git branch --set-upstream  origin/master
 

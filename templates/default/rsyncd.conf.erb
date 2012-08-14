@@ -1,5 +1,15 @@
-log file = <%= @log_file %>
-pid file = <%= @pid_file %>
-lock file = <%= @lock_file %>
-port = <%= @port %>
+# Rsync Config file written by chef
+#
 
+<% @globals.each do |key, value| -%>
+<%= key %> = <%= value %>
+<% end -%>
+
+# Modules 
+<% @modules.each_key do |mod| -%>
+[<%= mod %>]
+  <% @modules[mod].each do |key,value| -%>
+    <%= key %> = <%= value %> 
+  <% end %>
+
+<% end %>
