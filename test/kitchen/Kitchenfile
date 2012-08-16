@@ -1,0 +1,19 @@
+# vim:set ft=ruby:
+# 
+platform :centos do
+ version "6.3" do
+   box "opscode-centos-6.3"
+   box_url "https://opscode-vm.s3.amazonaws.com/vagrant/boxes/opscode-centos-6.3.box"
+ end
+end
+
+cookbook "rsync" do
+  configuration "default"
+  configuration "server"
+  configuration "lwrp_test"
+end
+
+cookbook "examples" do
+    lint false
+end
+
