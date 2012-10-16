@@ -20,9 +20,13 @@ Resources/Providers
 Usage
 =====
 /usr/bin/rsync --stats --links --recursive --times --compress --bwlimit=360 --exclude CVS --exclude .svn --delete-after cpan.pair.com::CPAN /backup/mirror/cpan
+
 /usr/bin/rsync --stats --links --recursive --times --compress --bwlimit=360 --exclude .svn --exclude CVS --delete-after rsync://mysql.mirrors.pair.com/mysql /backup/mirror/mysql
+
 /usr/bin/rsync --archive --safe-links --compress --bwlimite=360 --exclude CVS --exclude .svn --delete-after rsync.apache.org::apache-dist /backup/mirror/apache
+
 /usr/bin/rsync --links --recursive --times --compress --bwlimit=360 --exclude .svn --exclude CVS --delete-after download.eclipse.org::eclipseMirror /home/cerebrus/public_html/mirror/eclipse
+
 /usr/bin/rsync --stats --links --recursive --times --stats --compress --bwlimit=360 --exclude .svn --exclude CVS --delete-after rsync.mozdev.org::mozdev /backup/mirror/mozdev
 
 
