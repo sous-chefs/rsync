@@ -134,6 +134,8 @@ actions :execute, :stop
 default_action :execute
 
 attribute :name, :kind_of => String, :name_attribute => true
+attribute :password, :kind_of => String
+# Map to arguments
 attribute :source, :kind_of => String, :required => true
 attribute :destination, :kind_of => String, :required => true
 attribute :recursive, :default => true
@@ -191,28 +193,28 @@ attribute :partial-dir, :kind_of => String
 attribute :delay-updates, :default => true
 attribute :prune-empty-dirs, :default => true
 attribute :numeric-ids, :default => true
-attribute :timeout, :type_of => Integer, :default => 1200
-attribute :contimeout, :type_of => Integer, :default => 1200
+attribute :timeout, :kind_of => Integer, :default => 1200
+attribute :contimeout, :kind_of => Integer, :default => 1200
 attribute :ignore-times, :default => true
 attribute :size-only, :default => true
-attribute :modify-windows, :type_of => Integer
-attribute :temp-dir, :type_of => String
+attribute :modify-windows, :kind_of => Integer
+attribute :temp-dir, :kind_of => String
 attribute :fuzzy, :default => true
-attribute :compare-dest, :type_of => String
-attribute :copy-dest, :type_of => String
-attribute :link-dest, :type_of => String
+attribute :compare-dest, :kind_of => String
+attribute :copy-dest, :kind_of => String
+attribute :link-dest, :kind_of => String
 attribute :compress, :default => true
 attribute :compress-level, :kind_of => Integer
 attribute :skip-compress, :kind_of => Array
 attribute :cvs-exclude, :default => true
-attribute :filter, :type_of => String
-attribute :exclude, :type_of => String
-attribute :exclude-from, :type_of => String
-attribute :include, :type_of => String
-attribute :include-from, :type_of => String
-attribute :exclude, :type_of => String
-attribute :files-from, :type_of => String
-attribute :exclude, :type_of => String
+attribute :filter, :kind_of => String
+attribute :exclude, :kind_of => String
+attribute :exclude-from, :kind_of => String
+attribute :include, :kind_of => String
+attribute :include-from, :kind_of => String
+attribute :exclude, :kind_of => String
+attribute :files-from, :kind_of => String
+attribute :exclude, :kind_of => String
 attribute :from0, :default => true
 attribute :protect-args, :default => true
 attribute :address, :kind_of => String
@@ -220,8 +222,10 @@ attribute :port, :kind_of => Integer
 attribute :sockopts, :kind_of => String
 attribute :blocking-io, :default => true
 attribute :stats, :default => true
-attribute :eight-bit-output, :default => true
+# Will need to work around this arg, possibly not common so skip
+#attribute :8-bit-output, :default => true
 attribute :human-readable, :default => true
+# Extraneous information so skip
 #attribute :progress, :default => true
 attribute :itemize-changes, :default => true
 attribute :output-format, :kind_of => String
@@ -235,7 +239,6 @@ attribute :only-write-batch, :kind_of => String
 attribute :read-batch, :kind_of => String
 attribute :protocol, :kind_of => Integer
 attribute :iconv, :kind_of => String
-attribute :checksum-seed, :type_of => Integer
+attribute :checksum-seed, :kind_of => Integer
 attribute :ip6, :default => true
 attribute :ip4, :default => true
-

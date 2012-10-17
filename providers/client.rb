@@ -24,23 +24,51 @@ require 'chef/mixin/language'
 include Chef::Mixin::ShellOut
 
 action :execute do
-  unless @current_resource.running
-    shell_out!(start_command)
-    new_resource.updated_by_last_action(true)
-    Chef::Log.info( %Q(Starting command for resource #{new_resource.client_name}) )
+  cmd = start_command
+  if @current_resource.running
+    Chef::Log.info( %Q(Nothing to do for resource "#{new_resource.name}", already running process "#{cmd}") )
+    
+  else
+    cmd = start_command
+    start_status = shell_out!(cmd).exit_status
+
+    if start_status == 0
+      new_resource.updated_by_last_action(true)
+      Chef::Log.info( %Q(Starting command for resource #{new_resource.name}) )
+
+    else
+      Chef::Log.error( %Q(Unable to start process "#{cmd}" for resource #{new_resource.name}) )
+      
+    end
+
   end
-  Chef::Log.info( %Q(Nothing to do, resource running "#{new_resource.client_name}") )
 end
 
 action :stop do
-  if @current_resource.running
-    shell_out!(stop_command)
-    if @current_resource.running
-      Chef::Log.warn( %Q(Unable to gracefully stop, using kill on "#{new_resource.client_name}") )
-      shell_out!(kill_command)
-    end
-    Chef::Log.info( %Q(Stopped command for resource "#{new_resource.client_name}") )
+  cmd = stop_command
+  stop_status = shell_out!(cmd).exit_status
+
+  if  stop_status == 0
+    Chef::Log.info( %Q(Stopped process for resource "#{new_resource.name}") )
     new_resource.updated_by_last_action(true)
+
+  else
+    Chef::Log.warn( %Q(Unable to stop process for resource "#{new_resource.name}") )
+    Chef::Log.info( %Q(Command "#{cmd}" status "#{stop_status} for resource "#{new_resource.name}") )
+
+    if @current_resource.running
+      cmd = kill_command
+      Chef::Log.warn( %Q(Unable to gracefully stop, using "#{cmd} for resource "#{new_resource.name}") )
+
+      kill_status = shell_out!(cmd).exit_status
+      unless  kill_status == 0
+        Chef::Log.error( %Q(Unable to stop process using "#{cmd}", status "#{kill_status} for resource "#{new_resource.name}") )
+      end
+
+    else
+      Chef::Log.warn( %Q(Resource "#{new_resource.name}" unstoppable using "#{cmd}" with status "#{stop_status}") )
+
+    end
   end
 end
 
@@ -48,27 +76,32 @@ protected
 
 def status_command
   cmd = start_command
-  <<-EOF
-  ps -A | grep '#{cmd}' | grep -v grep
-  EOF
+  %Q(pgrep -x -f '#{cmd}')
 end
 
 def start_command
-  %Q(#{cmd})
+  args = ''
+  new_resource.state_attr.each do |attr|
+    continue if attr.equals? 'source' or attr.equals? 'destination'
+    if new_resource.send(name).type? Boolean
+      args += " --#{name}"
+    else
+      args += %Q( --#{name}=') + new_resource.send(name) + %q(')      
+    end
+  end
+  cmd = 'rsync ' + new_resource.source + " " + new_resource.destination + " " + args
+  cmd
 end
 
+# -KILL $(ps -A | grep '#{cmd}' | grep -v grep | awk '{print $1}')
 def stop_command
   cmd = start_command
-  <<-EOF
-  killall -QUIT $(ps -A | grep '#{cmd}' | grep -v grep | awk '{print $1}')
-  EOF
+  %Q(pkill -QUIT -x -f '#{cmd}')
 end
 
 def kill_command
   cmd = start_command
-  <<-EOF
-  killall -KILL $(ps -A | grep '#{cmd}' | grep -v grep | awk '{print $1}')
-  EOF
+  %Q(pkill -KILL -x -f '#{cmd}')
 end
 
 def determine_current_status!
@@ -79,11 +112,11 @@ def client_running?
   begin
     if shell_out(status_command).exitstatus == 0
       @current_resource.running true
-      Chef::Log.debug( %Q("#{new_resource.client_name}" is running) )
+      Chef::Log.debug( %Q("#{new_resource.name}" is running) )
     end
   rescue Mixlib::ShellOut::ShellCommandFailed, SystemCallError
     @current_resource.running false
-      Chef::Log.debug( %Q("#{new_resource.client_name}" is NOT running) )
+      Chef::Log.debug( %Q("#{new_resource.name}" is NOT running) )
     nil
   end
 end
