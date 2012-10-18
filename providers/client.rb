@@ -24,11 +24,11 @@ require 'chef/mixin/language'
 include Chef::Mixin::ShellOut
 
 action :execute do
-  cmd = start_command
   if @current_resource.running
     Chef::Log.info( %Q(Nothing to do for resource "#{new_resource.name}", already running process "#{cmd}") )
     
   else
+# Need to handle password, pipe to stdin when not using ssh keys
     cmd = start_command
     start_status = shell_out!(cmd).exit_status
 
@@ -82,12 +82,17 @@ end
 def start_command
   args = ''
   new_resource.state_attr.each do |attr|
-    continue if attr.equals? 'source' or attr.equals? 'destination'
-    if new_resource.send(name).type? Boolean
-      args += " --#{name}"
-    else
-      args += %Q( --#{name}=') + new_resource.send(name) + %q(')      
-    end
+    continue if attr == 'source' or attr == 'destination'
+#
+# Need to construct command line arguments, ideally looping through attribute
+# list - sorted if possible, filter out source and destination,
+# identifying "type" - boolean and other, cat in order
+#
+#    if new_resource.send(name).type?
+#      args += " --#{name}"
+#    else
+#      args += %Q( --#{name}=') + new_resource.send(name) + %q(')      
+#    end
   end
   cmd = 'rsync ' + new_resource.source + " " + new_resource.destination + " " + args
   cmd
