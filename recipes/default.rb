@@ -22,7 +22,7 @@ package "rsync"
 # Static
 rsync "mysql mirror" do
   destination "rsync://mysql.mirrors.pair.com/mysql"
-  source      "/mirrors/mysql""
+  source      "/mirrors/mysql"
   password    "P455w0rd"
   exclude     %w( .svn CVS )
   bwlimit     100
