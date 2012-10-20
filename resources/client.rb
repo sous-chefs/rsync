@@ -134,7 +134,6 @@ actions :execute, :stop
 default_action :execute
 
 attribute :name, :kind_of => String, :name_attribute => true
-attribute :as_user, :kind_of => String, :required => true
 attribute :source, :kind_of => String, :required => true
 attribute :destination, :kind_of => String, :required => true
 # Map to arguments
@@ -193,8 +192,8 @@ attribute :partial_dir, :kind_of => String
 attribute :delay_updates, :default => false
 attribute :prune_empty_dirs, :default => false
 attribute :numeric_ids, :default => false
-attribute :timeout, :kind_of => Integer, :default => 1200
-attribute :contimeout, :kind_of => Integer, :default => 1200
+attribute :timeout, :kind_of => Integer
+attribute :contimeout, :kind_of => Integer
 attribute :ignore_times, :default => false
 attribute :size_only, :default => false
 attribute :modify_windows, :kind_of => Integer

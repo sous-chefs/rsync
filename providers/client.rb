@@ -20,6 +20,7 @@
 
 require 'chef/mixin/shell_out'
 require 'chef/mixin/language'
+require 'open3'
 
 include Chef::Mixin::ShellOut
 
@@ -30,15 +31,21 @@ action :execute do
     Chef::Log.info( %Q(Nothing to do for resource "#{@new_resource.name}", already running process "#{cmd}") )
 
   else
-    status = shell_out!(cmd, :user => @new_resource.as_user).exitstatus
+    error = false
+    i, o, t = Open3.popen2e(cmd)
+    msg_t = Thread.new { error = true if t.value.exited? && t.value.exitstatus > 0 }
+    msg_t.join(1)
+    if error
+      output = o.readlines(5).join
+      error = output.include?("error")
 
-    if status == 0
-      @new_resource.updated_by_last_action(true)
-      Chef::Log.info( %Q(Execution of resource #{@new_resource.name} complete) )
+      Chef::Log.error( %Q(Could not execute "#{cmd} for resource "#{@new_resource.name}"\n#{output}) )
+      raise(output)
 
     else
-      Chef::Log.error( %Q(Status: "#{status}" Unable to start process "#{cmd}" for resource #{@new_resource.name}) )
-      raise
+      Process.detach(t.pid)
+      @new_resource.updated_by_last_action(true)
+      Chef::Log.info( %Q(Execution of resource "#{@new_resource.name}" complete) )
       
     end
 
@@ -112,83 +119,77 @@ def start_command
   args += " --executability" if @new_resource.executability == true
   args += " --chmod" if @new_resource.chmod == true
   args += " --acls" if @new_resource.acls == true
-
-#attribute :xattrs, :default => false
-#attribute :owner, :default => false
-#attribute :group, :default => false
-#attribute :devices, :default => false
-#attribute :specials, :default => false
-#attribute :times, :default => false
-#attribute :omit_dir_times, :default => false
-#attribute :super, :default => false
-#attribute :fake_super, :default => false
-#attribute :sparse, :default => false
-#attribute :dry_run, :default => false
-#attribute :whole_file, :default => false
-#attribute :one_file_system, :default => false
-#attribute :block_size, :default => false
-#attribute :existing, :default => false
-#attribute :ignore_existing, :default => false
-#attribute :remove_source_files, :default => false
-#attribute :delete_during, :default => false
-#attribute :delete_delay, :default => false
-#attribute :delete_after, :default => false
-#attribute :delete_excluded, :default => false
-#attribute :ignore_errors, :default => false
-#attribute :force, :default => false
-#attribute :max_delete, :kind_of => Integer
-#attribute :max_size, :kind_of => Integer
-#attribute :min_size, :kind_of => Integer
-#attribute :partial, :default => false
-#attribute :partial_dir, :kind_of => String
-#attribute :delay_updates, :default => false
-#attribute :prune_empty_dirs, :default => false
-#attribute :numeric_ids, :default => false
-#attribute :timeout, :kind_of => Integer, :default => 1200
-#attribute :contimeout, :kind_of => Integer, :default => 1200
-#attribute :ignore_times, :default => false
-#attribute :size_only, :default => false
-#attribute :modify_windows, :kind_of => Integer
-#attribute :temp_dir, :kind_of => String
-#attribute :fuzzy, :default => false
-#attribute :compare_dest, :kind_of => String
-#attribute :copy_dest, :kind_of => String
-#attribute :link_dest, :kind_of => String
-#attribute :compress, :default => false
-#attribute :compress_level, :kind_of => Integer
-#attribute :skip_compress, :kind_of => Array
-#attribute :cvs_exclude, :default => false
-#attribute :filter, :kind_of => String
-#attribute :exclude_from, :kind_of => String
-#attribute :include_from, :kind_of => String
-#attribute :files_from, :kind_of => String
-#attribute :from0, :default => false
-#attribute :protect_args, :default => false
-#attribute :address, :kind_of => String
-#attribute :port, :kind_of => Integer
-#attribute :sockopts, :kind_of => String
-#attribute :blocking_io, :default => false
-#attribute :stats, :default => false
-## Will need to work around this arg, possibly not common so skip
-##attribute :8_bit_output, :default => false
-#attribute :human_readable, :default => false
-## Extraneous information so skip
-##attribute :progress, :default => false
-#attribute :itemize_changes, :default => false
-#attribute :output_format, :kind_of => String
-#attribute :log_file, :kind_of => String
-#attribute :log_file_format, :kind_of => String
-#attribute :password_file, :kind_of => String
-#attribute :list_only, :default => false
-#attribute :bwlimit, :kind_of => Integer
-#attribute :write_batch, :kind_of => String
-#attribute :only_write_batch, :kind_of => String
-#attribute :read_batch, :kind_of => String
-#attribute :protocol, :kind_of => Integer
-#attribute :iconv, :kind_of => String
-#attribute :checksum_seed, :kind_of => Integer
-#attribute :ip6, :default => false
-#attribute :ip4, :default => false
+  args += " --xattrs" if @new_resource.xattrs == true
+  args += " --owner" if @new_resource.owner == true
+  args += " --group" if @new_resource.group == true
+  args += " --devices" if @new_resource.devices == true
+  args += " --specials" if @new_resource.specials == true
+  args += " --times" if @new_resource.times == true
+  args += " --omit-dir-times" if @new_resource.omit_dir_times == true
+  args += " --super" if @new_resource.super == true
+  args += " --fake-super" if @new_resource.fake_super == true
+  args += " --sparse" if @new_resource.sparse == true
+  args += " --dry-run" if @new_resource.dry_run == true
+  args += " --whole-file" if @new_resource.whole_file == true
+  args += " --one-file-system" if @new_resource.one_file_system == true
+  args += " --block_size" if @new_resource.block_size == true
+  args += " --existing" if @new_resource.existing == true
+  args += " --ignore-existing" if @new_resource.ignore_existing == true
+  args += " --remove-source-files" if @new_resource.remove_source_files == true
+  args += " --delete-during" if @new_resource.delete_during == true
+  args += " --delete-delay" if @new_resource.delete_delay == true
+  args += " --delete-after" if @new_resource.delete_after == true
+  args += " --delete-excluded" if @new_resource.delete_excluded == true
+  args += " --ignore-errors" if @new_resource.ignore_errors == true
+  args += " --force" if @new_resource.force == true
+  args += " --partial" if @new_resource.partial == true
+  args += " --max-delete=#{@new_resource.max_delete}" unless @new_resource.max_delete.nil?
+  args += " --max-size=#{@new_resource.max_size}" unless @new_resource.max_size.nil?
+  args += " --min-size=#{@new_resource.min_size}" unless @new_resource.min_size.nil?
+  args += %Q( --partial-dir="#{@new_resource.partial_dir}") unless @new_resource.partial_dir.nil?
+  args += " --delay-updates" if @new_resource.delay_updates == true
+  args += " --prune-empty-dirs" if @new_resource.prune_empty_dirs == true
+  args += " --numeric-ids" if @new_resource.numeric_ids == true
+  args += " --timeout=#{@new_resource.timeout}" unless @new_resource.timeout.nil?
+  args += " --contimeout=#{@new_resource.contimeout}" unless @new_resource.contimeout.nil?
+  args += " --ignore-times" if @new_resource.ignore_times == true
+  args += " --size-only" if @new_resource.size_only == true
+  args += " --fuzzy" if @new_resource.fuzzy == true
+  args += " --modify-windows=#{@new_resource.modify_windows}" unless @new_resource.modify_windows.nil?
+  args += %Q( --temp-dir="#{@new_resource.temp_dir}") unless @new_resource.temp_dir.nil?
+  args += %Q( --compare-dest="#{@new_resource.compare_dest}") unless @new_resource.compare_dest.nil?
+  args += %Q( --copy-dest="#{@new_resource.copy_dest}") unless @new_resource.copy_dest.nil?
+  args += %Q( --link-dest="#{@new_resource.link_dest}") unless @new_resource.link_dest.nil?
+  args += " --compress" if @new_resource.compress == true
+  args += " --compress-level=#{@new_resource.compress_level}" unless @new_resource.compress_level.nil?
+  @new_resource.skip_compress.each { |i| args += %Q( --skip-compress="#{i}") } if @new_resource.skip_compress.count > 0
+  args += " --cvs-exclude" if @new_resource.cvs_exclude == true
+  args += %Q( --filter="#{@new_resource.filter}") unless @new_resource.filter.nil?
+  args += %Q( --exclude-from="#{@new_resource.exclude_from}") unless @new_resource.exclude_from.nil?
+  args += %Q( --include-from="#{@new_resource.include_from}") unless @new_resource.include_from.nil?
+  args += %Q( --files-from="#{@new_resource.files_from}") unless @new_resource.files_from.nil?
+  args += " --from0" if @new_resource.from0 == true
+  args += " --protect-args" if @new_resource.protect_args == true
+  args += %Q( --address="#{@new_resource.address}") unless @new_resource.address.nil?
+  args += " --port=#{@new_resource.port}" unless @new_resource.port.nil?
+  args += %Q( --sockopts="#{@new_resource.sockopts}") unless @new_resource.sockopts.nil?
+  args += " --blocking-io" if @new_resource.blocking_io == true
+  args += " --stats" if @new_resource.stats == true
+  args += " --human-readable" if @new_resource.human_readable == true
+  args += " --itemize-changes" if @new_resource.itemize_changes == true
+  args += %Q( --output-format="#{@new_resource.output_format}") unless @new_resource.output_format.nil?
+  args += %Q( --log-file="#{@new_resource.log_file}") unless @new_resource.log_file.nil?
+  args += %Q( --log-file-format="#{@new_resource.log_file_format}") unless @new_resource.log_file_format.nil?
+  args += %Q( --password-file="#{@new_resource.password_file}") unless @new_resource.password_file.nil?
+  args += " --list-only" if @new_resource.list_only == true
+  args += %Q( --write-batch="#{@new_resource.write_batch}") unless @new_resource.write_batch.nil?
+  args += %Q( --only-write-batch="#{@new_resource.only_write_batch}") unless @new_resource.only_write_batch.nil?
+  args += %Q( --read-batch="#{@new_resource.read_batch}") unless @new_resource.read_batch.nil?
+  args += %Q( --iconv="#{@new_resource.iconv}") unless @new_resource.iconv.nil?
+  args += " --protocol=#{@new_resource.protocol}" unless @new_resource.protocol.nil?
+  args += " --checksum_seed=#{@new_resource.checksum_seed}" unless @new_resource.checksum_seed.nil?
+  args += " --ip6" if @new_resource.ip6 == true
+  args += " --ip4" if @new_resource.ip4 == true
 
   cmd += args
 end
