@@ -19,28 +19,33 @@
 
 package "rsync"
 
-# Static
-rsync "mysql mirror" do
-  destination "rsync://mysql.mirrors.pair.com/mysql"
-  source      "/mirrors/mysql"
-  password    "P455w0rd"
-  exclude     %w( .svn CVS )
-  bwlimit     100
-  recursive
-  stats
-  links
-  compress
+rsync_client  "mysql mirror" do
+  source      "/home/touloumiss/perl-5.16.1.tar"
+  destination "touloumiss@stathy:/tmp/chef_rsync_test-perl.tar"
+  archive
+  as_user     "touloumiss"
 end
 
+# Static
+#rsync "mysql mirror" do
+#  destination "rsync://mysql.mirrors.pair.com/mysql"
+#  source      "/mirrors/mysql"
+#  exclude     %w( .svn CVS )
+#  bwlimit     100
+#  recursive
+#  stats
+#  links
+#  compress
+#end
+
 # Dynamic, attribute driven
-rsync "#{node[:rsync][:mysql_mirror][:name]}" do
-  destination node[:rsync][:mysql_mirror][:destination]
-  source      node[:rsync][:mysql_mirror][:source]
-  password    node[:rsync][:mysql_mirror][:password]
-  exclude     node[:rsync][:mysql_mirror][:excludes]
-  bwlimit     node[:rsync][:mysql_mirror][:bwlimit]
-  recursive
-  stats
-  links
-  compress
-end
+#rsync "#{node[:rsync][:mysql_mirror][:name]}" do
+#  destination node[:rsync][:mysql_mirror][:destination]
+#  source      node[:rsync][:mysql_mirror][:source]
+#  exclude     node[:rsync][:mysql_mirror][:excludes]
+#  bwlimit     node[:rsync][:mysql_mirror][:bwlimit]
+#  recursive
+#  stats
+#  links
+#  compress
+#end

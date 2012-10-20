@@ -17,8 +17,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-default[:rsync][:company_repo][:password] = "P455w0rd"
-
 #default[:rsync][:mysql_mirror][:name] = "mysql mirror"
 #default[:rsync][:mysql_mirror][:destination] = "rsync://mysql.mirrors.pair.com/mysql"
 #default[:rsync][:mysql_mirror][:source] = "/mirrors/mysql"

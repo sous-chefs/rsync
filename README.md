@@ -25,7 +25,7 @@ client
 
 Usage
 =====
-[![Build Status](https://secure.travis-ci.org/stathy/rsync.png)](http://travis-ci.org/stathy/rsync)
+[![Build Status](https://secure.travis-ci.org/stathy/rsync.png)](http://travis-ci.org/stathy/rsync/tree/COOK-1773)
 
 Examples
 --------
