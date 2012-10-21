@@ -17,9 +17,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#default[:rsync][:mysql_mirror][:name] = "mysql mirror"
-#default[:rsync][:mysql_mirror][:destination] = "rsync://mysql.mirrors.pair.com/mysql"
-#default[:rsync][:mysql_mirror][:source] = "/mirrors/mysql"
-#default[:rsync][:mysql_mirror][:exclude] = %w( .svn CVS )
-#default[:rsync][:mysql_mirror][:bwlimit] = 100
+default[:rsync][:exclude] = %w( .svn CVS )
+default[:rsync][:bwlimit] = 10000
 
+# mysql mirror role
+#default[:rsync][:name] = "mysql mirror"
+#default[:rsync][:destination] = "rsync://mysql.mirrors.pair.com/mysql"
+#default[:rsync][:source] = "/mirrors/mysql"
+
+#cpan mirror role
+#default[:rsync][:name] = "cpan mirror"
+#default[:rsync][:destination] = "cpan.pair.com::CPAN"
+#default[:rsync][:source] = "/mirrors/CPAN"
+#default[:rsync][:exclude] = %w( .svn CVS )
+#default[:rsync][:bwlimit] = 10000

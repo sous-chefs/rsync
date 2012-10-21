@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: rsync
-# Recipe:: default
+# Recipe:: mysql_mirror
 #
 # Copyright 2008-2009, Opscode, Inc.
 #
@@ -17,11 +17,17 @@
 # limitations under the License.
 #
 
-package "rsync"
-
-rsync_client  "mysql mirror" do
-  source      "/home/touloumiss/perl-5.16.1.tar"
-  destination "touloumiss@stathy:/tmp/chef_rsync_test-perl.tar"
-  archive
-  bwlimit     900
+# /usr/bin/rsync --stats --links --recursive --times --compress --bwlimit=360 \
+#  --exclude CVS --exclude .svn --delete-after cpan.pair.com::CPAN /mirror/cpan
+rsync_client "#{node[:rsync][:name]}" do
+  source      "#{node[:rsync][:source]}"
+  destination "#{node[:rsync][:destination]}"
+  stats
+  links
+  recursive
+  times
+  compress
+  bwlimit     node[:rsync][:bwlimit]
+  exclude     node[:rsync][:excludes]
+  delete_after
 end

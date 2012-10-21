@@ -33,11 +33,11 @@ action :execute do
   else
     error = false
     i, o, t = Open3.popen2e(cmd)
-    msg_t = Thread.new { error = true if t.value.exited? && t.value.exitstatus > 0 }
-    msg_t.join(1)
+    status_t = Thread.new { error = true if t.value.exited? && t.value.exitstatus > 0 }
+    status_t.join(1)
+
     if error
       output = o.readlines(5).join
-      error = output.include?("error")
 
       Chef::Log.error( %Q(Could not execute "#{cmd} for resource "#{@new_resource.name}"\n#{output}) )
       raise(output)
@@ -58,7 +58,7 @@ action :stop do
 
   if  stop_status == 0
     Chef::Log.info( %Q(Stopped process for resource "#{@new_resource.name}") )
-    new_resource.updated_by_last_action(true)
+    @new_resource.updated_by_last_action(true)
 
   else
     Chef::Log.warn( %Q(Unable to stop process for resource "#{@new_resource.name}") )
@@ -89,7 +89,7 @@ end
 
 def start_command
 
-  cmd = 'rsync ' + @new_resource.source + " " + @new_resource.destination
+  cmd = 'rsync '
   args = ''
 
   args += " --archive" if @new_resource.archive == true
@@ -191,12 +191,12 @@ def start_command
   args += " --ip6" if @new_resource.ip6 == true
   args += " --ip4" if @new_resource.ip4 == true
 
-  cmd += args
+  cmd += args + " " + @new_resource.source + " " + @new_resource.destination
 end
 
 def load_current_resource
-  @current_resource = Chef::Resource::RsyncClient.new(new_resource.name)
-  @current_resource.name(new_resource.name)
+  @current_resource = Chef::Resource::RsyncClient.new(@new_resource.name)
+  @current_resource.name(@new_resource.name)
   @current_resource
 end
 
@@ -205,21 +205,21 @@ protected
 # -KILL $(ps -A | grep '#{cmd}' | grep -v grep | awk '{print $1}')
 def stop_command
   cmd = start_command
-  %Q(pkill -QUIT -x -f '#{cmd}')
+  %Q(pkill -QUIT -x -f 'rsync #{cmd}')
 end
 
 def kill_command
   cmd = start_command
-  %Q(pkill -KILL -x -f '#{cmd}')
+  %Q(pkill -KILL -x -f 'rsync #{cmd}')
 end
 
 def running?
   begin
     if shell_out(status_command).exitstatus == 0
-      Chef::Log.debug( %Q("#{new_resource.name}" is running) )
+      Chef::Log.debug( %Q("#{@new_resource.name}" is running) )
     end
   rescue Mixlib::ShellOut::ShellCommandFailed, SystemCallError
-      Chef::Log.debug( %Q("#{new_resource.name}" is NOT running) )
+      Chef::Log.debug( %Q("#{@new_resource.name}" is NOT running) )
     nil
   end
 end

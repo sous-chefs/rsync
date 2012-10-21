@@ -133,7 +133,6 @@
 actions :execute, :stop
 default_action :execute
 
-attribute :name, :kind_of => String, :name_attribute => true
 attribute :source, :kind_of => String, :required => true
 attribute :destination, :kind_of => String, :required => true
 # Map to arguments
