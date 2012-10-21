@@ -21,13 +21,6 @@ default[:rsync][:exclude] = %w( .svn CVS )
 default[:rsync][:bwlimit] = 10000
 
 # mysql mirror role
-#default[:rsync][:name] = "mysql mirror"
-#default[:rsync][:destination] = "rsync://mysql.mirrors.pair.com/mysql"
-#default[:rsync][:source] = "/mirrors/mysql"
-
-#cpan mirror role
-#default[:rsync][:name] = "cpan mirror"
-#default[:rsync][:destination] = "cpan.pair.com::CPAN"
-#default[:rsync][:source] = "/mirrors/CPAN"
-#default[:rsync][:exclude] = %w( .svn CVS )
-#default[:rsync][:bwlimit] = 10000
+default[:rsync][:name] = nil
+default[:rsync][:destination] = nil
+default[:rsync][:source] = nil
