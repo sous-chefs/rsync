@@ -18,10 +18,3 @@
 #
 
 package "rsync"
-
-rsync_client  "mysql mirror" do
-  source      "/home/touloumiss/perl-5.16.1.tar"
-  destination "touloumiss@stathy:/tmp/chef_rsync_test-perl.tar"
-  archive
-  bwlimit     900
-end
