@@ -19,7 +19,7 @@
 
 # /usr/bin/rsync --stats --links --recursive --times --compress --bwlimit=360 \
 #  --exclude .svn --exclude CVS --delete-after rsync://mysql.mirrors.pair.com/mysql /mirror/mysql
-rsync "#{node[:rsync][:name]}" do
+rsync_client "#{node[:rsync][:name]}" do
   source      "#{node[:rsync][:source]}"
   destination "#{node[:rsync][:destination]}"
   stats
