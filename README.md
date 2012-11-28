@@ -4,8 +4,6 @@ Manages the use of [rsync](http://http://en.wikipedia.org/wiki/Rsync) for data d
 not only installs the rsync package but also includes LWRPs for initiating and managing the rsync client
 program.
 
-[![Build Status](https://secure.travis-ci.org/stathy/rsync.png)](http://travis-ci.org/stathy/rsync/tree/COOK-1773)
-
 Requirements
 ============
 
@@ -220,7 +218,7 @@ Attributes
 License and Author
 ==================
 
-Author:: Stathy G. Touloumis
+Author:: cookbooks@opscode.com
 
 Copyright:: 2012, Opscode, Inc
 

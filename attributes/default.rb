@@ -1,5 +1,5 @@
 #
-# Author:: Stathy Touloumis (<stathy@opscode.com>)
+# Author:: cookbooks@opscode.com
 # Cookbook Name:: rsync
 # Attributes:: default
 #

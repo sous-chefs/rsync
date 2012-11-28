@@ -1,4 +1,5 @@
 #
+# Author:: cookbooks@opscode.com
 # Cookbook Name:: rsync
 # Recipe:: default
 #
