@@ -1,0 +1,11 @@
+<% node['rsync']['client']['vhosts'].each do |vhost|
+        if vhost['vhost'] == nil || vhost['vhost'] == ""
+                next
+        end
+%>
+mkdir -p <%= vhost['destination'] %>
+rsync -aPv <% if vhost['delete'] %>--delete<% end %> rsync://pub@<%= @server %>/<%= vhost['vhost'] %> <%= vhost['destination'] != nil && vhost['destination'] != "" ? vhost['destination'] : node['rsync']['server']['src_root'] + '/' + vhost['vhost'] %>
+
+<%
+end
+%>
