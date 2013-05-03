@@ -28,7 +28,7 @@ def write_conf
       rsync_modules[resource.name] ||= Hash.new
       attr_keys.each do |key| 
         value = resource.send(key)
-        next if value.blank?
+        next if value.nil?
         rsync_modules[resource.name][snake_to_space(key)] = value 
       end
     end
@@ -36,7 +36,7 @@ def write_conf
 
   global_opts = Hash.new
   node['rsyncd']['globals'].each do |key, value|
-    next if value.blank?
+    next if value.nil?
     global_opts[snake_to_space(key)] = value
   end
 
