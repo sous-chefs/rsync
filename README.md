@@ -86,6 +86,7 @@ Unless specified these paramaters use the rsyncd default values as refed in the 
 * `timeout` - *Fixnum* - Default: `600` - Using this parameter you can ensure that rsync won't wait on a dead client forever. The timeout is specified in seconds. A value of zero means no timeout.
 * `dont_compress` - This parameter allows you to select filenames based on wildcard patterns that should not be compressed when pulling files from the daemon
 * `lock_file` - This parameter specifies the file to use to support the "max connections" parameter. The rsync daemon uses record locking on this file to ensure that the max connections limit is not exceeded for the modules sharing the lock file. The default is /var/run/rsyncd.lock
+* `refuse_options` - This parameter allows you to specify a space-separated list of rsync command line options that will be refused by your rsync daemon.
 
 
 Usage
