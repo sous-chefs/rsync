@@ -291,7 +291,9 @@ License and Author
 ==================
 
 Author:: cookbooks@opscode.com
+
 Contributor:: Jesse Nelson <spheromak@gmail.com>
+
 Contributor:: Stathy G. Touloumis <stathy@opscode.com>
 
 Copyright:: 2013, Opscode, Inc
