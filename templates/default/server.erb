@@ -1,0 +1,25 @@
+log file = /var/rsync/rsyncd.log
+pid file = /var/rsync/rsyncd.pid
+lock file = /var/rsync/rsync.lock
+
+<% node['rsync']['server']['vhosts'].each do |vhost| %>
+    [<%= vhost['vhost'] %>]
+    #max connections = 5
+    log file = /var/rsync/rsync-<%= vhost['vhost'] %>.log
+    #timeout = 300
+    comment = Unauthorized access prohibited.
+    path = <%= node['rsync']['server']['src_root'] %>/<%= vhost['vhost'] %>
+    read only = yes
+    use chroot = false
+
+<% end %>
+
+<% @webservers.each do |webserver| %>
+    [<%= webserver['hostname'] %>]
+    log file = /var/rsync/rsync-<%= webserver['hostname'] %>.log
+    comment = Unauthorized access prohibited.
+    path = <%= node['rsync']['server']['src_root'] %>/nginx-logs/<%= webserver['hostname'] %>
+    read only = no
+    use chroot = false
+
+<% end %>
