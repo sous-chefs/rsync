@@ -15,7 +15,7 @@ def write_conf
   attr_keys=%w/path comment read_only write_only list uid gid auth_users secrets_file hosts_allow
               hosts_deny max_connections munge_symlinks use_chroot numeric_ids fake_super 
               exclude_from exclude include_from include strict_modes log_file log_format 
-              transfer_logging timeout dont_compress lock_file/
+              transfer_logging timeout dont_compress lock_file refuse_options/
 
   # Walk the collection, and build a new hash of RsyncServe resources
   # We will use this hash to build up a template for rsyncd.conf

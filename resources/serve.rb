@@ -40,4 +40,4 @@ attribute :transfer_logging, :kind_of =>  [ TrueClass, FalseClass ]
 attribute :timeout, :kind_of => Fixnum, :default => 600
 attribute :dont_compress, :kind_of  =>  String
 attribute :lock_file, :kind_of => String
-
+attribute :refuse_options, :kind_of => String
