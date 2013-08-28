@@ -1,15 +1,14 @@
-Description
-===========
-Rsync cookbook with rsyncd LWRP
-
-More info on ryncd options can be found in the [Docs][1]
+rsync Cookbook
+==============
+Rsync cookbook with rsyncd LWRP. More info on ryncd options can be found in the [Docs](http://www.samba.org/ftp/rsync/rsyncd.conf.html).
 
 Requirements
-============
+------------
 Tested on CentOS 6, Ubuntu 12.04.
 
+
 Attributes
-==========
+----------
 #### `node['rsyncd']['service']`  *(String)  default: "rsync"*
 
 The name of the init service
@@ -26,7 +25,6 @@ Path to the rsyncd config file. This is the default, but the serve resource can 
 #### `node['rsyncd']['globals']`  *(Hash)  default: {}*
 
 This is where you can store key-value pairs that coincide with rsyncd globals.
-As of this writing these are the rsyncd globals per the [Rsyncd docs][1]
 
 * __motd file:__ This parameter allows you to specify a "message of the day" to display to clients on each connect. This usually contains site information and any legal notices. The default is no motd file.
 * __pid file:__ This parameter tells the rsync daemon to write its process ID to that file. If the file already exists, the rsync daemon will abort rather than overwrite the file.
@@ -36,22 +34,22 @@ As of this writing these are the rsyncd globals per the [Rsyncd docs][1]
 
 Refer to the documentation for rsyncd for more info.
 
+
 Recipes
-=======
-default
 -------
+### default
 This recipe simply installs the rsync package, nothing more.
 
-server
-------
+### server
 This recipe sets up the rsyncd service (on centos) and a stub service that is used by the `rsync_serve` LWRP.
 
+
 Resources/Providers
-===================
-serve
------
+-------------------
+### serve
 This LWRP implements a rsync server module. The folowing params are chef-only, the rest implement the feature as described in the [rsyncd docs][1]
-### Parameters
+
+#### Parameters
 ##### Required:
 * `path` - Path which this module should server
 
@@ -90,23 +88,25 @@ Unless specified these paramaters use the rsyncd default values as refed in the 
 
 
 Usage
-=====
+-----
 After loading the rsync cookbook you have acces to the `rsync_serve` resource for serving up a generic rsyncd module wiht many options. You should include `rsync::server` before trying to use the LWRP as it will setup the basic rsync service for your platform.
 
-Examples
---------
+
+### Examples
 More complex example in examples/recipes, but the simplest form of serving up a directory:
 
-     rsync_serve "temp_module" do
-       path "/tmp/foo"
-     end
+```ruby
+ rsync_serve "temp_module" do
+   path "/tmp/foo"
+ end
+```
 
 
-License and Author
-==================
+License & Authors
+-----------------
+- Author:: Jesse Nelson <spheromak@gmail.com>
 
-Author:: Jesse Nelson <spheromak@gmail.com>
-
+```text
 Copyright:: 2012, Opscode, Inc
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -120,6 +120,4 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-
-
-[1]: http://www.samba.org/ftp/rsync/rsyncd.conf.html "Rsyncd Docs"
+```
