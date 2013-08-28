@@ -2,7 +2,7 @@
 include_recipe "rsync::server"
 
 # more complex with allow/deny logging etc etc.
-rsync_serve "test" do 
+rsync_serve "test" do
   path "/tmp"
   comment "lwrp test module"
   read_only true

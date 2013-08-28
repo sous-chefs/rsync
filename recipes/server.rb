@@ -4,10 +4,10 @@
 #
 include_recipe "rsync"
 
-case node['platform_family'] 
+case node['platform_family']
 when "rhel"
   # redhat doens't provide an init script for rsyncd
-  template "/etc/init.d/rsyncd" do 
+  template "/etc/init.d/rsyncd" do
     source "rsync-init.erb"
     owner "root"
     group "root"
@@ -16,10 +16,10 @@ when "rhel"
 when "debian"
   template "/etc/default/rsync" do
     source "rsync-defaults.erb"
-    variables( 
+    variables(
       :ionice => node['rsyncd']['ionice'],
       :nice => node['rsyncd']['nice'],
-      :config_file => node['rsyncd']['config'] 
+      :config_file => node['rsyncd']['config']
     )
     owner "root"
     group "root"

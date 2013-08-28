@@ -2,7 +2,7 @@
 include_recipe "rsync::server"
 
 # more complex with allow/deny logging etc etc.
-rsync_serve "centos-prod" do 
+rsync_serve "centos-prod" do
   path "/data/repos/prod/centos"
   comment "CentOS prod mirror"
   read_only true

@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 #
-site :opscode 
+site :opscode
 
 metadata
 
