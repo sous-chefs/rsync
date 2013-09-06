@@ -1,5 +1,7 @@
 rsync Cookbook
 ==============
+[![Build Status](https://secure.travis-ci.org/opscode-cookbooks/rsync.png?branch=master)](http://travis-ci.org/opscode-cookbooks/rsync)
+
 Rsync cookbook with rsyncd LWRP. More info on ryncd options can be found in the [Docs](http://www.samba.org/ftp/rsync/rsyncd.conf.html).
 
 Requirements
@@ -39,9 +41,6 @@ Recipes
 -------
 ### default
 This recipe simply installs the rsync package, nothing more.
-
-### server
-This recipe sets up the rsyncd service (on centos) and a stub service that is used by the `rsync_serve` LWRP.
 
 
 Resources/Providers
@@ -89,17 +88,85 @@ Unless specified these paramaters use the rsyncd default values as refed in the 
 
 Usage
 -----
-After loading the rsync cookbook you have acces to the `rsync_serve` resource for serving up a generic rsyncd module wiht many options. You should include `rsync::server` before trying to use the LWRP as it will setup the basic rsync service for your platform.
+After loading the rsync cookbook you have access to the `rsync_serve` resource for serving up a generic rsyncd module with many options.
 
+**You must include the `rsync::server` recipe before you can use the LWRP** as shown in the examples below.
 
 ### Examples
-More complex example in examples/recipes, but the simplest form of serving up a directory:
-
+Serve a directory:
 ```ruby
- rsync_serve "temp_module" do
-   path "/tmp/foo"
- end
+include_recipe 'rsync::server'
+
+rsync_serve 'tmp' do
+  path '/tmp'
+end
 ```
+
+Serve a directory with read only and specify uids:
+```
+include_recipe 'rsync::server'
+
+rsync_serve 'tmp' do
+  path      '/tmp'
+  uid       'nobody'
+  gid       'nobody'
+  read_only true
+end
+```
+
+A more complex example with networking:
+```ruby
+include_recipe 'rsync::server'
+
+rsync_serve 'centos-prod' do
+  path             '/data/repos/prod/centos'
+  comment          'CentOS prod mirror'
+  read_only        true
+  use_chroot       true
+  list             true
+  uid              'nobody'
+  gid              'nobody'
+  hosts_allow      '127.0.0.1, 10.4.1.0/24, 192.168.4.0/24'
+  hosts_deny       '0.0.0.0/0'
+  max_connections  10
+  transfer_logging true
+  log_file         '/tmp/centos-sync'
+end
+```
+
+Development
+-----------
+This section details "quick development" steps. For a detailed explanation, see [[Contributing.md]].
+
+1. Clone this repository from GitHub:
+
+        $ git clone git@github.com:opscode-cookbooks/rsync.git
+
+2. Create a git branch
+
+        $ git checkout -b my_bug_fix
+
+3. Install dependencies:
+
+        $ bundle install
+
+4. Make your changes/patches/fixes, committing appropiately
+5. **Write tests**
+6. Run the tests:
+
+    - `bundle exec foodcritic -f any .`
+    - `bundle exec rspec`
+    - `bundle exec rubocop`
+    - `bundle exec kitchen test`
+
+    In detail:
+
+    - Foodcritic will catch any Chef-specific style errors
+    - RSpec will run the unit tests
+    - Rubocop will check for Ruby-specific style errors
+    - Test Kitchen will run and converge the recipes
+
+
 
 
 License & Authors

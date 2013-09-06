@@ -1,13 +1,13 @@
-name              "rsync"
-maintainer        "Opscode, Inc."
-maintainer_email  "cookbooks@opscode.com"
-license           "Apache 2.0"
-description       "Installs rsync"
-version           "0.8.3"
+name              'rsync'
+maintainer        'Opscode, Inc.'
+maintainer_email  'cookbooks@opscode.com'
+license           'Apache 2.0'
+description       'Installs rsync'
+version           '0.8.3'
 
+recipe 'rsync::default', 'Installs rsync, Provides LWRP rsync_serve for serving paths via rsyncd'
+recipe 'rsync::server', 'Installs rsync and starts a service to serve a directory'
 
-recipe "rsync", "Installs rsync, Provides LWRP rsync_serve for serivng pats via rsyncd"
-
-%w{ centos fedora redhat ubuntu debian }.each do |os|
+%w(centos fedora redhat ubuntu debian).each do |os|
   supports os
 end
