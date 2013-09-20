@@ -17,4 +17,6 @@
 # limitations under the License.
 #
 
-package "rsync"
+package "rsync" do
+  version node['rsync']['version']
+end
