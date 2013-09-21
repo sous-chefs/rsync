@@ -1,0 +1,23 @@
+driver_plugin: vagrant
+driver_config:
+  require_chef_omnibus: true
+
+platforms:
+  - name: ubuntu-12.04
+    run_list:
+      - recipe[apt]
+  - name: centos-6.4
+
+suites:
+  - name: default
+    run_list:
+      - recipe[rsync::default]
+  - name: simple
+    run_list:
+      - recipe[fake::simple]
+  - name: read_only
+    run_list:
+      - recipe[fake::read_only]
+  - name: networking
+    run_list:
+      - recipe[fake::networking]
