@@ -3,6 +3,12 @@ rsync Cookbook CHANGELOG
 This file is used to list changes made in each version of the rsync cookbook.
 
 
+v0.8.4
+------
+### Improvement
+- **[COOK-3580](https://tickets.opscode.com/browse/COOK-3580)** - Add Test Kitchen, Specs, and Travis CI
+
+
 v0.8.2
 ------
 ### Improvement
