@@ -85,6 +85,8 @@ protected
       uid
       use_chroot
       write_only
+      pre__xfer_exec
+      post__xfer_exec
     )
   end
 
@@ -97,13 +99,14 @@ protected
     end
   end
 
-  # Expand "snake_case_things" to "snake case things".
+  # Expand "snake_case_things" to "snake case things" and
+  # "snake__case_things" to "snake-case things"
   #
   # @param [String] string
   #
   # @return [String]
   def snake_to_space(string)
-    string.to_s.gsub(/_/, ' ')
+    string.to_s.gsub(/__/, '-').gsub(/_/, ' ')
   end
 
   # The list of rsync modules defined in the resource collection.
