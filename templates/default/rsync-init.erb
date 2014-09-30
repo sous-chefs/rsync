@@ -59,7 +59,8 @@ restart)
   start
 ;;
 status)
-  status rsyncd
+  status rsync
+  exit $?
 ;;
 *)
   echo "Usage: rsyncd {start|stop|restart|status}"
