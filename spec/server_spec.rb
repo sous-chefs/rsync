@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'rsync::server' do
   context 'on rhel' do
     let(:chef_run) do
-      ChefSpec::ChefRunner.new(platform: 'redhat', version: '6.3').converge('rsync::server')
+      ChefSpec::SoloRunner.new(platform: 'redhat', version: '6.3').converge(described_recipe)
     end
 
     it 'includes the default recipe' do
@@ -14,7 +14,7 @@ describe 'rsync::server' do
       let(:template) { chef_run.template('/etc/init.d/rsyncd') }
 
       it 'writes the template' do
-        expect(chef_run).to create_file_with_content('/etc/init.d/rsyncd', 'Rsyncd init script')
+        expect(chef_run).to render_file('/etc/init.d/rsyncd').with_content('Rsyncd init script')
       end
 
       it 'is owned by root:root' do
@@ -27,14 +27,23 @@ describe 'rsync::server' do
       end
     end
 
-    it 'starts and enables the rsync service' do
-      expect(chef_run).to set_service_to_start_on_boot('rsyncd')
+    context "config file exists" do
+      before do
+        allow(File).to receive(:exists?).and_call_original
+        allow(File).to receive(:exists?).with(chef_run.node.rsyncd.config).and_return(true)
+        chef_run.converge(described_recipe)
+      end
+
+      it 'starts and enables the rsync service' do
+        expect(chef_run).to enable_service('rsyncd')
+        expect(chef_run).to start_service('rsyncd')
+      end
     end
   end
 
   context 'on debian' do
     let(:chef_run) do
-      ChefSpec::ChefRunner.new(platform: 'ubuntu', version: '12.04').converge('rsync::server')
+      ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '12.04').converge(described_recipe)
     end
 
     it 'includes the default recipe' do
@@ -45,7 +54,7 @@ describe 'rsync::server' do
       let(:template) { chef_run.template('/etc/default/rsync') }
 
       it 'writes the template' do
-        expect(chef_run).to create_file_with_content('/etc/default/rsync', 'defaults file for rsync daemon mode')
+        expect(chef_run).to render_file('/etc/default/rsync').with_content('defaults file for rsync daemon mode')
       end
 
       it 'is owned by root:root' do
@@ -58,8 +67,17 @@ describe 'rsync::server' do
       end
     end
 
-    it 'starts and enables the rsync service' do
-      expect(chef_run).to set_service_to_start_on_boot('rsync')
+    context "config file exists" do
+      before do
+        allow(File).to receive(:exists?).and_call_original
+        allow(File).to receive(:exists?).with(chef_run.node.rsyncd.config).and_return(true)
+        chef_run.converge(described_recipe)
+      end
+
+      it 'starts and enables the rsync service' do
+        expect(chef_run).to enable_service('rsync')
+        expect(chef_run).to start_service('rsync')
+      end
     end
   end
 end
