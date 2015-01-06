@@ -33,4 +33,6 @@
   grep "max connections = 10" /etc/rsyncd.conf
   grep "transfer logging = true" /etc/rsyncd.conf
   grep "log file = /tmp/centos-sync" /etc/rsyncd.conf
+  grep "pre-xfer exec = /bin/true" /etc/rsyncd.conf
+  grep "post-xfer exec = /bin/true" /etc/rsyncd.conf
 }

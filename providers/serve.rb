@@ -85,6 +85,8 @@ protected
       uid
       use_chroot
       write_only
+      postxfer_exec
+      prexfer_exec
     )
   end
 
@@ -97,6 +99,15 @@ protected
     end
   end
 
+  # Perform replacement on specific (un)hyphenated config directives.
+  #
+  # @param [String] string
+  #
+  # @return [String]
+  def unhyphenate(string)
+    string.to_s.gsub(/(pre|post)xfer/, '\1-xfer')
+  end
+
   # Expand "snake_case_things" to "snake case things".
   #
   # @param [String] string
@@ -104,6 +115,15 @@ protected
   # @return [String]
   def snake_to_space(string)
     string.to_s.gsub(/_/, ' ')
+  end
+
+  # Converts a provider attribute to an rsync config directive.
+  #
+  # @param [String] string
+  #
+  # @return [String]
+  def attribute_to_directive(string)
+    unhyphenate(snake_to_space(string))
   end
 
   # The list of rsync modules defined in the resource collection.
@@ -116,7 +136,7 @@ protected
         resource_attributes.each do |key|
           value = resource.send(key)
           next if value.nil?
-          hash[resource.name][snake_to_space(key)] = value
+          hash[resource.name][attribute_to_directive(key)] = value
         end
       end
 
@@ -129,7 +149,7 @@ protected
   # @return [Hash]
   def global_modules
     node['rsyncd']['globals'].reduce({}) do |hash, (key, value)|
-      hash[snake_to_space(key)] = value unless value.nil?
+      hash[attribute_to_directive(key)] = value unless value.nil?
       hash
     end
   end
