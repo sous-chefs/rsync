@@ -85,6 +85,8 @@ protected
       uid
       use_chroot
       write_only
+      incoming_chmod
+      outgoing_chmod
     )
   end
 
