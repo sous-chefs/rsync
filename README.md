@@ -1,6 +1,6 @@
 rsync Cookbook
 ==============
-[![Build Status](https://secure.travis-ci.org/opscode-cookbooks/rsync.png?branch=master)](http://travis-ci.org/opscode-cookbooks/rsync)
+[![Build Status](https://secure.travis-ci.org/chef-cookbooks/rsync.png?branch=master)](http://travis-ci.org/chef-cookbooks/rsync)
 
 Rsync cookbook with rsyncd LWRP. More info on ryncd options can be found in the [Docs](http://www.samba.org/ftp/rsync/rsyncd.conf.html).
 
@@ -140,7 +140,7 @@ This section details "quick development" steps. For a detailed explanation, see 
 
 1. Clone this repository from GitHub:
 
-        $ git clone git@github.com:opscode-cookbooks/rsync.git
+        $ git clone git@github.com:chef-cookbooks/rsync.git
 
 2. Create a git branch
 
@@ -172,7 +172,7 @@ License & Authors
 - Author:: Jesse Nelson <spheromak@gmail.com>
 
 ```text
-Copyright:: 2012, Opscode, Inc
+Copyright:: 2012, Chef Software, Inc
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
