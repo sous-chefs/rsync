@@ -30,6 +30,9 @@ protected
   # Build and write the config template
   #
   def write_conf
+    g_m = global_modules
+    r_m = rsync_modules
+
     t = template(new_resource.config_path) do
       source   'rsyncd.conf.erb'
       cookbook 'rsync'
@@ -37,8 +40,8 @@ protected
       group    'root'
       mode     '0640'
       variables(
-        :globals => global_modules,
-        :modules => rsync_modules
+        :globals => g_m,
+        :modules => r_m
       )
       notifies :restart, "service[#{node['rsyncd']['service']}]", :delayed
     end
