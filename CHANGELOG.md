@@ -1,7 +1,6 @@
-rsync Cookbook CHANGELOG
-========================
-This file is used to list changes made in each version of the rsync cookbook.
-
+v0.8.6 (2014-09-30)
+-------------------
+- [#11] Fixes to allow rsync daemon to be started if not up.
 
 v0.8.4
 ------
