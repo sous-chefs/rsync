@@ -41,3 +41,6 @@ attribute :timeout, :kind_of => Fixnum, :default => 600
 attribute :dont_compress, :kind_of  =>  String
 attribute :lock_file, :kind_of => String
 attribute :refuse_options, :kind_of => String
+# the rsyncd.conf has two options with dashes, we can not use dashes here -> let's use double_..
+attribute :pre__xfer_exec, :kind_of => String
+attribute :post__xfer_exec, :kind_of => String
