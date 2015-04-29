@@ -3,7 +3,7 @@ maintainer        'Chef Software, Inc.'
 maintainer_email  'cookbooks@chef.io'
 license           'Apache 2.0'
 description       'Installs rsync'
-version           '0.8.6'
+version           '0.8.7'
 
 recipe 'rsync::default', 'Installs rsync, Provides LWRP rsync_serve for serving paths via rsyncd'
 recipe 'rsync::server', 'Installs rsync and starts a service to serve a directory'
