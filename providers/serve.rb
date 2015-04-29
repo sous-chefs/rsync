@@ -25,11 +25,14 @@ action :remove do
 end
 
 protected
+
   #
   # Walk collection for :add rsync_serve resources
   # Build and write the config template
   #
   def write_conf
+    globals = global_modules
+    modules = rsync_modules
     t = template(new_resource.config_path) do
       source   'rsyncd.conf.erb'
       cookbook 'rsync'
@@ -37,8 +40,8 @@ protected
       group    'root'
       mode     '0640'
       variables(
-        :globals => global_modules,
-        :modules => rsync_modules
+        :globals => globals,
+        :modules => modules
       )
       notifies :restart, "service[#{node['rsyncd']['service']}]", :delayed
     end
