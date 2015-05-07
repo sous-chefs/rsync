@@ -43,3 +43,5 @@ attribute :lock_file, :kind_of => String
 attribute :refuse_options, :kind_of => String
 attribute :prexfer_exec, :kind_of => String
 attribute :postxfer_exec, :kind_of => String
+attribute :incoming_chmod, :kind_of => String
+attribute :outgoing_chmod, :kind_of => String
