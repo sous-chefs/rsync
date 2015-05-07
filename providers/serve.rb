@@ -67,6 +67,7 @@ def resource_attributes
     hosts_deny
     include
     include_from
+    incoming_chmod
     list
     lock_file
     log_file
@@ -74,6 +75,7 @@ def resource_attributes
     max_connections
     munge_symlinks
     numeric_ids
+    outgoing_chmod
     path
     postxfer_exec
     prexfer_exec
