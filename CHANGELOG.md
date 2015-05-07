@@ -1,3 +1,9 @@
+v0.8.8 (2015-05-07)
+-------------------
+- [#15] Add incoming/outgoing chmod options
+- [#16] Add prexfer/postxfer exec commands
+- [#14,#17] Support Chef 12
+
 v0.8.6 (2014-09-30)
 -------------------
 - [#11] Fixes to allow rsync daemon to be started if not up.
