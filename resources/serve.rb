@@ -41,3 +41,5 @@ attribute :timeout, :kind_of => Fixnum, :default => 600
 attribute :dont_compress, :kind_of  =>  String
 attribute :lock_file, :kind_of => String
 attribute :refuse_options, :kind_of => String
+attribute :prexfer_exec, :kind_of => String
+attribute :postxfer_exec, :kind_of => String

@@ -84,6 +84,8 @@ Unless specified these paramaters use the rsyncd default values as refed in the 
 * `dont_compress` - This parameter allows you to select filenames based on wildcard patterns that should not be compressed when pulling files from the daemon
 * `lock_file` - This parameter specifies the file to use to support the "max connections" parameter. The rsync daemon uses record locking on this file to ensure that the max connections limit is not exceeded for the modules sharing the lock file. The default is /var/run/rsyncd.lock
 * `refuse_options` - This parameter allows you to specify a space-separated list of rsync command line options that will be refused by your rsync daemon.
+* `prexfer_exec` - A command to run before each transfer to or from this module. If this command fails, the transfer will be aborted.
+* `postxfer_exec` - A command to run after each transfer to or from this module.
 
 
 Usage
@@ -131,6 +133,7 @@ rsync_serve 'centos-prod' do
   max_connections  10
   transfer_logging true
   log_file         '/tmp/centos-sync'
+  postxfer_exec    '/usr/local/bin/collect_things.sh'
 end
 ```
 

@@ -75,6 +75,8 @@ def resource_attributes
     munge_symlinks
     numeric_ids
     path
+    postxfer_exec
+    prexfer_exec
     read_only
     refuse_options
     secrets_file
@@ -96,6 +98,15 @@ def rsync_resources
   end
 end
 
+# Perform replacement on specific (un)hyphenated config directives.
+#
+# @param [String] string
+#
+# @return [String]
+def unhyphenate(string)
+  string.to_s.gsub(/(pre|post)xfer/, '\1-xfer')
+end
+
 # Expand "snake_case_things" to "snake case things".
 #
 # @param [String] string
@@ -105,21 +116,28 @@ def snake_to_space(string)
   string.to_s.gsub(/_/, ' ')
 end
 
+# Converts a provider attribute to an rsync config directive.
+#
+# @param [String] string
+#
+# @return [String]
+def attribute_to_directive(string)
+  unhyphenate(snake_to_space(string))
+end
+
 # The list of rsync modules defined in the resource collection.
 #
 # @return [Hash]
 def rsync_modules
-  rsync_resources.each_with_object({}) do |hash, resource|
+  rsync_resources.each_with_object({}) do |resource, hash|
     if resource.config_path == new_resource.config_path && resource.action == :add
       hash[resource.name] ||= {}
       resource_attributes.each do |key|
         value = resource.send(key)
         next if value.nil?
-        hash[resource.name][snake_to_space(key)] = value
+        hash[resource.name][attribute_to_directive(key)] = value
       end
     end
-
-    hash
   end
 end
 
@@ -127,8 +145,7 @@ end
 #
 # @return [Hash]
 def global_modules
-  node['rsyncd']['globals'].each_with_object({}) do |hash, (key, value)|
-    hash[snake_to_space(key)] = value unless value.nil?
-    hash
+  node['rsyncd']['globals'].each_with_object({}) do |(key, value), hash|
+    hash[attribute_to_directive(key)] = value unless value.nil?
   end
 end
