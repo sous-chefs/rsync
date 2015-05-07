@@ -1,7 +1,14 @@
 AllCops:
-  Excludes:
+  Exclude:
     - vendor/**
+    - metadata.rb
+    - Guardfile
+    - test/fixtures/cookbooks/fake/metadata.rb
+    - .kitchen/**
 
+# Disable ABCSize because it doesn't fit well with resources
+AbcSize:
+  Enabled: false
 AlignParameters:
   Enabled: false
 Encoding:
@@ -12,3 +19,5 @@ LineLength:
   Enabled: false
 MethodLength:
   Max: 30
+SingleSpaceBeforeFirstArg:
+  Enabled: false

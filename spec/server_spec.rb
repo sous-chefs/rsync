@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe 'rsync::server' do
   before :each do
-    allow(File).to receive(:exists?).and_call_original
-    allow(File).to receive(:exists?).with("/etc/rsyncd.conf").and_return(true)
+    allow(File).to receive(:exist?).and_call_original
+    allow(File).to receive(:exist?).with('/etc/rsyncd.conf').and_return(true)
   end
 
   context 'on rhel' do

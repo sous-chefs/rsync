@@ -16,11 +16,11 @@
 # See the License for the specific language governing permissions and
 #
 
-action :add do
+action :add do # ~FC017
   write_conf
 end
 
-action :remove do
+action :remove do # ~FC017
   write_conf
 end
 
@@ -56,34 +56,34 @@ end
 # @return [Array<String>]
 def resource_attributes
   %w(
-      auth_users
-      comment
-      dont_compress
-      exclude
-      exclude_from
-      fake_super
-      gid
-      hosts_allow
-      hosts_deny
-      include
-      include_from
-      list
-      lock_file
-      log_file
-      log_format
-      max_connections
-      munge_symlinks
-      numeric_ids
-      path
-      read_only
-      refuse_options
-      secrets_file
-      strict_modes
-      timeout
-      transfer_logging
-      uid
-      use_chroot
-      write_only
+    auth_users
+    comment
+    dont_compress
+    exclude
+    exclude_from
+    fake_super
+    gid
+    hosts_allow
+    hosts_deny
+    include
+    include_from
+    list
+    lock_file
+    log_file
+    log_format
+    max_connections
+    munge_symlinks
+    numeric_ids
+    path
+    read_only
+    refuse_options
+    secrets_file
+    strict_modes
+    timeout
+    transfer_logging
+    uid
+    use_chroot
+    write_only
   )
 end
 
@@ -109,7 +109,7 @@ end
 #
 # @return [Hash]
 def rsync_modules
-  rsync_resources.reduce({}) do |hash, resource|
+  rsync_resources.each_with_object({}) do |hash, resource|
     if resource.config_path == new_resource.config_path && resource.action == :add
       hash[resource.name] ||= {}
       resource_attributes.each do |key|
@@ -127,7 +127,7 @@ end
 #
 # @return [Hash]
 def global_modules
-  node['rsyncd']['globals'].reduce({}) do |hash, (key, value)|
+  node['rsyncd']['globals'].each_with_object({}) do |hash, (key, value)|
     hash[snake_to_space(key)] = value unless value.nil?
     hash
   end

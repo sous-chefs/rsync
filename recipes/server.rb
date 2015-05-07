@@ -38,5 +38,5 @@ end
 
 service node['rsyncd']['service'] do
   action  [:enable, :start]
-  only_if { ::File.exists?(node['rsyncd']['config']) }
+  only_if { ::File.exist?(node['rsyncd']['config']) }
 end
