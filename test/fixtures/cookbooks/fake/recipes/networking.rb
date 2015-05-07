@@ -15,4 +15,6 @@ rsync_serve 'centos-prod' do
   log_file         '/tmp/centos-sync'
   prexfer_exec     '/bin/true'
   postxfer_exec    '/bin/true'
+  incoming_chmod   'a=r,u+w,D+x'
+  outgoing_chmod   'a=r,u+w,D+x'
 end

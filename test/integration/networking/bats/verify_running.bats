@@ -35,4 +35,6 @@
   grep "log file = /tmp/centos-sync" /etc/rsyncd.conf
   grep "pre-xfer exec = /bin/true" /etc/rsyncd.conf
   grep "post-xfer exec = /bin/true" /etc/rsyncd.conf
+  grep "incoming chmod = a=r,u+w,D+x" /etc/rsyncd.conf
+  grep "outgoing chmod = a=r,u+w,D+x" /etc/rsyncd.conf
 }
