@@ -13,4 +13,6 @@ rsync_serve 'centos-prod' do
   max_connections  10
   transfer_logging true
   log_file         '/tmp/centos-sync'
+  prexfer_exec     '/bin/true'
+  postxfer_exec    '/bin/true'
 end
