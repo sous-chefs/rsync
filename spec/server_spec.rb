@@ -1,9 +1,14 @@
 require 'spec_helper'
 
 describe 'rsync::server' do
+  before :each do
+    allow(File).to receive(:exists?).and_call_original
+    allow(File).to receive(:exists?).with("/etc/rsyncd.conf").and_return(true)
+  end
+
   context 'on rhel' do
     let(:chef_run) do
-      ChefSpec::ChefRunner.new(platform: 'redhat', version: '6.3').converge('rsync::server')
+      ChefSpec::ServerRunner.new(platform: 'redhat', version: '6.3').converge('rsync::server')
     end
 
     it 'includes the default recipe' do
@@ -14,7 +19,7 @@ describe 'rsync::server' do
       let(:template) { chef_run.template('/etc/init.d/rsyncd') }
 
       it 'writes the template' do
-        expect(chef_run).to create_file_with_content('/etc/init.d/rsyncd', 'Rsyncd init script')
+        expect(chef_run).to render_file('/etc/init.d/rsyncd').with_content('Rsyncd init script')
       end
 
       it 'is owned by root:root' do
@@ -28,13 +33,13 @@ describe 'rsync::server' do
     end
 
     it 'starts and enables the rsync service' do
-      expect(chef_run).to set_service_to_start_on_boot('rsyncd')
+      expect(chef_run).to enable_service('rsyncd')
     end
   end
 
   context 'on debian' do
     let(:chef_run) do
-      ChefSpec::ChefRunner.new(platform: 'ubuntu', version: '12.04').converge('rsync::server')
+      ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '12.04').converge('rsync::server')
     end
 
     it 'includes the default recipe' do
@@ -45,7 +50,7 @@ describe 'rsync::server' do
       let(:template) { chef_run.template('/etc/default/rsync') }
 
       it 'writes the template' do
-        expect(chef_run).to create_file_with_content('/etc/default/rsync', 'defaults file for rsync daemon mode')
+        expect(chef_run).to render_file('/etc/default/rsync').with_content('defaults file for rsync daemon mode')
       end
 
       it 'is owned by root:root' do
@@ -59,7 +64,7 @@ describe 'rsync::server' do
     end
 
     it 'starts and enables the rsync service' do
-      expect(chef_run).to set_service_to_start_on_boot('rsync')
+      expect(chef_run).to enable_service('rsync')
     end
   end
 end
