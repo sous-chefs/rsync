@@ -8,6 +8,9 @@ version           '0.8.8'
 recipe 'rsync::default', 'Installs rsync, Provides LWRP rsync_serve for serving paths via rsyncd'
 recipe 'rsync::server', 'Installs rsync and starts a service to serve a directory'
 
-%w(centos fedora redhat ubuntu debian).each do |os|
+%w(amazon centos centos fedora oracle redhat scientific ubuntu).each do |os|
   supports os
 end
+
+source_url 'https://github.com/chef-cookbooks/rsync' if respond_to?(:source_url)
+issues_url 'https://github.com/chef-cookbooks/rsync/issues' if respond_to?(:issues_url)
