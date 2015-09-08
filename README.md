@@ -1,6 +1,7 @@
 rsync Cookbook
 ==============
-[![Build Status](https://secure.travis-ci.org/chef-cookbooks/rsync.png?branch=master)](http://travis-ci.org/chef-cookbooks/rsync)
+[![Build Status](https://travis-ci.org/chef-cookbooks/rsync.svg?branch=master)](http://travis-ci.org/chef-cookbooks/rsync)
+[![Cookbook Version](https://img.shields.io/cookbook/v/rsync.svg)](https://supermarket.chef.io/cookbooks/rsync)
 
 Rsync cookbook with rsyncd LWRP. More info on ryncd options can be found in the [Docs](http://www.samba.org/ftp/rsync/rsyncd.conf.html).
 
@@ -175,7 +176,7 @@ License & Authors
 - Author:: Jesse Nelson <spheromak@gmail.com>
 
 ```text
-Copyright:: 2012, Chef Software, Inc
+Copyright:: 2012-2015, Chef Software, Inc
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
