@@ -1,9 +1,7 @@
 AllCops:
   Exclude:
     - vendor/**/*
-    - metadata.rb
     - Guardfile
-    - test/fixtures/cookbooks/fake/metadata.rb
     - .kitchen/**
 
 # Disable ABCSize because it doesn't fit well with resources

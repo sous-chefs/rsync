@@ -36,8 +36,8 @@ def write_conf
     group    'root'
     mode     '0640'
     variables(
-      :globals => global_modules,
-      :modules => rsync_modules
+      globals: global_modules,
+      modules: rsync_modules
     )
     notifies :restart, "service[#{node['rsyncd']['service']}]", :delayed
   end
@@ -115,7 +115,7 @@ end
 #
 # @return [String]
 def snake_to_space(string)
-  string.to_s.gsub(/_/, ' ')
+  string.to_s.tr('_', ' ')
 end
 
 # Converts a provider attribute to an rsync config directive.
