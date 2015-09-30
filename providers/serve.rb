@@ -1,3 +1,4 @@
+
 #
 # Cookbook Name:: rsync
 # Provider:: serve
@@ -132,13 +133,12 @@ end
 # @return [Hash]
 def rsync_modules
   rsync_resources.each_with_object({}) do |resource, hash|
-    if resource.config_path == new_resource.config_path && resource.action == :add
-      hash[resource.name] ||= {}
-      resource_attributes.each do |key|
-        value = resource.send(key)
-        next if value.nil?
-        hash[resource.name][attribute_to_directive(key)] = value
-      end
+    skip unless resource.config_path == new_resource.config_path && resource.action == :add
+    hash[resource.name] ||= {}
+    resource_attributes.each do |key|
+      value = resource.send(key)
+      next if value.nil?
+      hash[resource.name][attribute_to_directive(key)] = value
     end
   end
 end
