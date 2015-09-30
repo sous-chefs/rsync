@@ -12,20 +12,20 @@ Tested on CentOS 6, Ubuntu 12.04.
 
 Attributes
 ----------
-#### `node['rsyncd']['service']`  *(String)  default: "rsync"*
+`node['rsyncd']['service']`  *(String)  default: "rsync"*
 
 The name of the init service
 
-#### `node['rsyncd']['config']`  *(Hash)  default: "/etc/rsyncd.conf"*
+`node['rsyncd']['config']`  *(Hash)  default: "/etc/rsyncd.conf"*
 
 Path to the rsyncd config file. This is the default, but the serve resource can write config files to arbitrary paths independant of this.
 
-#### `node['rsyncd']['nice']`  *(String)  default: ""*  __Debian/ubuntu only__
+`node['rsyncd']['nice']`  *(String)  default: ""*  __Debian/ubuntu only__
 
-#### `node['rsyncd']['ionice']`  *(String)  default: ""*  __Debian/ubuntu only__
+`node['rsyncd']['ionice']`  *(String)  default: ""*  __Debian/ubuntu only__
 
 
-#### `node['rsyncd']['globals']`  *(Hash)  default: {}*
+`node['rsyncd']['globals']`  *(Hash)  default: {}*
 
 This is where you can store key-value pairs that coincide with rsyncd globals.
 
@@ -138,46 +138,16 @@ rsync_serve 'centos-prod' do
 end
 ```
 
-Development
------------
-This section details "quick development" steps. For a detailed explanation, see [[Contributing.md]].
-
-1. Clone this repository from GitHub:
-
-        $ git clone git@github.com:chef-cookbooks/rsync.git
-
-2. Create a git branch
-
-        $ git checkout -b my_bug_fix
-
-3. Install dependencies:
-
-        $ bundle install
-
-4. Make your changes/patches/fixes, committing appropiately
-5. **Write tests**
-6. Run the tests:
-    - `bundle exec foodcritic -f any .`
-    - `bundle exec rspec`
-    - `bundle exec rubocop`
-    - `bundle exec kitchen test`
-
-    In detail:
-    - Foodcritic will catch any Chef-specific style errors
-    - RSpec will run the unit tests
-    - Rubocop will check for Ruby-specific style errors
-    - Test Kitchen will run and converge the recipes
-
-
-
 
 License & Authors
 -----------------
-- Author:: Jesse Nelson <spheromak@gmail.com>
+**Author:** Jesse Nelson (<spheromak@gmail.com>)
 
-```text
-Copyright:: 2012-2015, Chef Software, Inc
+**Author:** Cookbook Engineering Team (<cookbooks@chef.io>)
 
+**Copyright:** 2012-2015, Chef Software, Inc.
+
+```
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
