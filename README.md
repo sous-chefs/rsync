@@ -7,7 +7,15 @@ Rsync cookbook with rsyncd LWRP. More info on ryncd options can be found in the 
 
 Requirements
 ------------
-Tested on CentOS 6, Ubuntu 12.04.
+#### Platforms
+- Debian/Ubuntu
+- RHEL/CentOS/Scientific/Amazon/Oracle
+
+#### Chef
+- Chef 11+
+
+#### Cookbooks
+- none
 
 
 Attributes
