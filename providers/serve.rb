@@ -137,12 +137,11 @@ def rsync_modules
       resource.action == :add ||
       resource.action.include?(:add)
     )
-      hash[resource.name] ||= {}
-      resource_attributes.each do |key|
-        value = resource.send(key)
-        next if value.nil?
-        hash[resource.name][attribute_to_directive(key)] = value
-      end
+    hash[resource.name] ||= {}
+    resource_attributes.each do |key|
+      value = resource.send(key)
+      next if value.nil?
+      hash[resource.name][attribute_to_directive(key)] = value
     end
   end
 end
