@@ -2,6 +2,26 @@ rsync Cookbook CHANGELOG
 ========================
 This file is used to list changes made in each version of the rsync cookbook.
 
+v0.8.9 (2015-10-05)
+-------------------
+- Fixed support for Chef 12.4.X and later
+- Added Chefspec matchers
+- Added additional platforms to Test Kitchen
+- Updated rubocop rules to our standard set and resolved all warnings
+- Updated Travis CI to test on additional Ruby versions
+- Updated contributing and testing docs
+- Added maintainers.toml and maintainers.md files
+- Added additional testing depedendencies to the Gemfile with version pinning
+- Added cookbook version and Travis CI badges to the readme
+- Clarified that Chef 11.0 is the minimum required Chef version for this cookbook
+- Removed outdated development information from the readme
+- Added a Rakefile for simplified testing
+- Added a chefignore file to limit what files are uploaded to the Chef server
+- Added Amazon Linux, Oracle, and Scientific Linux to the metadata
+Added source_url and issues_url to metadata.rb for Supermarket
+- Removed all pre-Ruby 1.9 hash rockets
+
+
 v0.8.8 (2015-05-07)
 -------------------
 - [#15] Add incoming/outgoing chmod options
