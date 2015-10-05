@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'rsync::default' do
   let(:chef_run) do
-    ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '12.04').converge('rsync::default')
+    ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '12.04').converge('rsync::default')
   end
 
   it 'installs the rsync package' do

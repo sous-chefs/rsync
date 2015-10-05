@@ -2,6 +2,10 @@ rsync Cookbook CHANGELOG
 ========================
 This file is used to list changes made in each version of the rsync cookbook.
 
+v0.8.9 (2015-09-30)
+-------------------
+- [#18] Support Chef > 12.4.1
+
 v0.8.8 (2015-05-07)
 -------------------
 - [#15] Add incoming/outgoing chmod options
