@@ -3,7 +3,7 @@
 # Cookbook Name:: rsync
 # Provider:: serve
 #
-# Copyright 2012-2013, Chef Software, Inc.
+# Copyright 2012-2015, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -133,7 +133,7 @@ end
 # @return [Hash]
 def rsync_modules
   rsync_resources.each_with_object({}) do |resource, hash|
-    skip unless resource.config_path == new_resource.config_path && resource.action == :add
+    next unless resource.config_path == new_resource.config_path && resource.action == :add
     hash[resource.name] ||= {}
     resource_attributes.each do |key|
       value = resource.send(key)
