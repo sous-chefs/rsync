@@ -21,7 +21,7 @@ suites:
   - name: simple
     run_list:
       - recipe[fake::simple]
-  - name: read_only
+  - name: read-only
     run_list:
       - recipe[fake::read_only]
   - name: networking
