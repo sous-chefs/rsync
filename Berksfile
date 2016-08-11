@@ -5,5 +5,5 @@ metadata
 group :integration do
   cookbook 'yum'
   cookbook 'apt'
-  cookbook 'fake', path: 'test/fixtures/cookbooks/fake'
+  cookbook 'test', path: 'test/fixtures/cookbooks/test'
 end
