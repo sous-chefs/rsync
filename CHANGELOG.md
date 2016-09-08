@@ -1,9 +1,16 @@
-rsync Cookbook CHANGELOG
-========================
+# rsync Cookbook CHANGELOG
+
 This file is used to list changes made in each version of the rsync cookbook.
 
-v0.8.9 (2015-10-05)
--------------------
+## 1.0.0 (2016-09-07)
+
+- Run integration tests in Travis CI with kitchen-dokken
+- Run chefspec and cookstyle in Travis
+- Add use_inline_resources to the provider
+- Require chef 12
+
+## v0.8.9 (2015-10-05)
+
 - Fixed support for Chef 12.4.X and later
 - Added Chefspec matchers
 - Added additional platforms to Test Kitchen
@@ -17,40 +24,40 @@ v0.8.9 (2015-10-05)
 - Removed outdated development information from the readme
 - Added a Rakefile for simplified testing
 - Added a chefignore file to limit what files are uploaded to the Chef server
-- Added Amazon Linux, Oracle, and Scientific Linux to the metadata
-Added source_url and issues_url to metadata.rb for Supermarket
+- Added Amazon Linux, Oracle, and Scientific Linux to the metadata Added source_url and issues_url to metadata.rb for Supermarket
 - Removed all pre-Ruby 1.9 hash rockets
 
+## v0.8.8 (2015-05-07)
 
-v0.8.8 (2015-05-07)
--------------------
 - [#15] Add incoming/outgoing chmod options
 - [#16] Add prexfer/postxfer exec commands
 - [#14,#17] Support Chef 12
 
-v0.8.6 (2014-09-30)
--------------------
+## v0.8.6 (2014-09-30)
+
 - [#11] Fixes to allow rsync daemon to be started if not up.
 
-v0.8.4
-------
+## v0.8.4
+
 ### Improvement
+
 - **[COOK-3580](https://tickets.chef.io/browse/COOK-3580)** - Add Test Kitchen, Specs, and Travis CI
 
+## v0.8.2
 
-v0.8.2
-------
 ### Improvement
+
 - **[COOK-3153](https://tickets.chef.io/browse/COOK-3153)** - Add `refuse_options` parameter to `rsync_serve`
 
 ### Bug
+
 - **[COOK-2874](https://tickets.chef.io/browse/COOK-2874)** - Support chkconfig
 - **[COOK-2873](https://tickets.chef.io/browse/COOK-2873)** - Allow setting value to false in `rsyncd.conf`
 
-v0.8.0
-------
-* [COOK-878] - Add LWRP for rsyncd.conf and server recipe
+## v0.8.0
 
-v0.7.0
-------
-* Initial released version
+- [COOK-878] - Add LWRP for rsyncd.conf and server recipe
+
+## v0.7.0
+
+- Initial released version
