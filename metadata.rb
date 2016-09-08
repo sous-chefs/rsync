@@ -12,5 +12,7 @@ recipe 'rsync::server', 'Installs rsync and starts a service to serve a director
   supports os
 end
 
-source_url 'https://github.com/chef-cookbooks/rsync' if respond_to?(:source_url)
-issues_url 'https://github.com/chef-cookbooks/rsync/issues' if respond_to?(:issues_url)
+source_url 'https://github.com/chef-cookbooks/rsync'
+issues_url 'https://github.com/chef-cookbooks/rsync/issues'
+
+chef_version '>= 12.1'
