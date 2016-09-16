@@ -13,7 +13,7 @@ Rsync cookbook with rsyncd LWRP. More info on ryncd options can be found in the 
 
 ### Chef
 
-- Chef 12+
+- Chef 12.1+
 
 ### Cookbooks
 
