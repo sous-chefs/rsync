@@ -14,5 +14,4 @@ end
 
 source_url 'https://github.com/chef-cookbooks/rsync'
 issues_url 'https://github.com/chef-cookbooks/rsync/issues'
-
 chef_version '>= 12.1'
