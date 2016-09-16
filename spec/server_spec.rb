@@ -7,8 +7,8 @@ describe 'rsync::server' do
   end
 
   context 'on rhel' do
-    let(:chef_run) do
-      ChefSpec::SoloRunner.new(platform: 'redhat', version: '6.3').converge('rsync::server')
+    cached(:chef_run) do
+      ChefSpec::SoloRunner.new(platform: 'centos', version: '6.8').converge('rsync::server')
     end
 
     it 'includes the default recipe' do
@@ -38,8 +38,8 @@ describe 'rsync::server' do
   end
 
   context 'on debian' do
-    let(:chef_run) do
-      ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '12.04').converge('rsync::server')
+    cached(:chef_run) do
+      ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '16.04').converge('rsync::server')
     end
 
     it 'includes the default recipe' do
