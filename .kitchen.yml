@@ -14,6 +14,8 @@ platforms:
     run_list: apt::default
   - name: fedora-24
     run_list: yum::dnf_yum_compat
+  - name: opensuse-13.2
+  - name: opensuse-leap-42.1
   - name: ubuntu-12.04
     run_list: apt::default
   - name: ubuntu-14.04
@@ -27,10 +29,10 @@ suites:
       - recipe[rsync::default]
   - name: simple
     run_list:
-      - recipe[fake::simple]
+      - recipe[test::simple]
   - name: read-only
     run_list:
-      - recipe[fake::read_only]
+      - recipe[test::read_only]
   - name: networking
     run_list:
-      - recipe[fake::networking]
+      - recipe[test::networking]

@@ -16,7 +16,7 @@ platforms:
     pid_one_command: /sbin/init
     intermediate_instructions:
       - RUN /usr/bin/apt-get update
-      - RUN /usr/bin/apt-get install lsb-release -y
+      - RUN /usr/bin/apt-get install lsb-release procps -y
 
 - name: debian-8
   driver:
@@ -42,6 +42,21 @@ platforms:
     intermediate_instructions:
       - RUN yum -y install which initscripts
 
+- name: centos-7
+  driver:
+    image: centos:7
+    platform: rhel
+    pid_one_command: /usr/lib/systemd/systemd
+    intermediate_instructions:
+      - RUN yum -y install lsof which systemd-sysv initscripts
+
+- name: fedora-latest
+  driver:
+    image: fedora:latest
+    pid_one_command: /usr/lib/systemd/systemd
+    intermediate_instructions:
+      - RUN dnf -y install yum which systemd-sysv initscripts
+
 - name: ubuntu-12.04
   driver:
     image: ubuntu-upstart:12.04
@@ -63,16 +78,30 @@ platforms:
     intermediate_instructions:
       - RUN /usr/bin/apt-get update
 
+- name: opensuse-13.2
+  driver:
+    image: opensuse:13.2
+    pid_one_command: /bin/systemd
+    intermediate_instructions:
+      - RUN zypper --non-interactive install aaa_base perl-Getopt-Long-Descriptive which net-tools
+
+- name: opensuse-42.1
+  driver:
+    image: opensuse:42.1
+    pid_one_command: /bin/systemd
+    intermediate_instructions:
+      - RUN zypper --non-interactive install aaa_base perl-Getopt-Long-Descriptive which hostname
+
 suites:
   - name: default
     run_list:
       - recipe[rsync::default]
   - name: simple
     run_list:
-      - recipe[fake::simple]
+      - recipe[test::simple]
   - name: read-only
     run_list:
-      - recipe[fake::read_only]
+      - recipe[test::read_only]
   - name: networking
     run_list:
-      - recipe[fake::networking]
+      - recipe[test::networking]
