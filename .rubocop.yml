@@ -1,0 +1,14 @@
+# rubocop todo
+
+Lint/AmbiguousRegexpLiteral:
+  Exclude:
+    - 'test/integration/networking/default_spec.rb'
+    - 'test/integration/read_only/default_spec.rb'
+    - 'test/integration/simple/default_spec.rb'
+
+# Cop supports --auto-correct.
+# Configuration parameters: EnforcedStyle, SupportedStyles, AllowInnerSlashes.
+# SupportedStyles: slashes, percent_r, mixed
+Style/RegexpLiteral:
+  Exclude:
+    - 'test/integration/networking/default_spec.rb'
