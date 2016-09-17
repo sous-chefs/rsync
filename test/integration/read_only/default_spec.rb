@@ -2,10 +2,8 @@ describe package('rsync') do
   it { should be_installed }
 end
 
-describe service('rsync') do
-  it { should be_installed }
-  it { should be_enabled }
-  it { should be_running }
+describe command('ps aux | grep rsync') do
+  its('exit_status') { should eq 0 }
 end
 
 # rsync is serving /tmp
