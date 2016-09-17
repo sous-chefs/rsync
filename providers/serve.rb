@@ -16,7 +16,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 #
-use_inline_resources
+
+# we are not using inline resources on purpose here as it breaks
+# the accumulator pattern this cookbook implements
 
 action :add do # ~FC017
   write_conf
