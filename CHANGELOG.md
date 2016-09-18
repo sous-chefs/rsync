@@ -2,6 +2,13 @@
 
 This file is used to list changes made in each version of the rsync cookbook.
 
+## 1.0.1 (2016-09-18)
+- Clarify in readme we require Chef 12.1+
+- Update maintainer text
+- Disable use_inline_resources as it breaks the provider
+- Convert tests to use inspec
+- Moved all testing to the test recipe and removed the need for the apt cookbook in testing
+
 ## 1.0.0 (2016-09-07)
 
 - Run integration tests in Travis CI with kitchen-dokken
