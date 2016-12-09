@@ -23,7 +23,7 @@ attribute :auth_users, kind_of: String
 attribute :secrets_file, kind_of: String
 attribute :hosts_allow, kind_of: String
 attribute :hosts_deny, kind_of: String
-attribute :max_connections, kind_of: Fixnum, default: 0
+attribute :max_connections, kind_of: Integer, default: 0
 attribute :munge_symlinks, kind_of: [TrueClass, FalseClass], default: true
 attribute :use_chroot, kind_of: [TrueClass, FalseClass]
 attribute :numeric_ids, kind_of: [TrueClass, FalseClass], default: true
@@ -37,7 +37,7 @@ attribute :log_file, kind_of: String
 attribute :log_format, kind_of: String
 attribute :transfer_logging, kind_of: [TrueClass, FalseClass]
 # by default rsync sets no client timeout (lets client choose, but this is a trivial DOS) so we make a 10 minute one
-attribute :timeout, kind_of: Fixnum, default: 600
+attribute :timeout, kind_of: Integer, default: 600
 attribute :dont_compress, kind_of: String
 attribute :lock_file, kind_of: String
 attribute :refuse_options, kind_of: String
