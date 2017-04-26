@@ -2,6 +2,12 @@
 
 This file is used to list changes made in each version of the rsync cookbook.
 
+## 1.0.2 (2017-04-26)
+
+- Cookstyle fixes
+- Test with Local Delivery instead of Rake
+- Update apache2 license string
+
 ## 1.0.1 (2016-09-18)
 - Clarify in readme we require Chef 12.1+
 - Update maintainer text
