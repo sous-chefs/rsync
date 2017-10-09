@@ -25,6 +25,10 @@ Rsync cookbook with rsyncd LWRP. More info on ryncd options can be found in the 
 
 The name of the init service
 
+`node['rsyncd']['init']` _(String) default: "sysvinit(for Debian platform and Redhat platform without systemd)/systemd (for Redhat platform supporting systemd )"_
+
+The name of the init mode (Currently supporting **systemd/sysvinit**)
+
 `node['rsyncd']['config']` _(Hash) default: "/etc/rsyncd.conf"_
 
 Path to the rsyncd config file. This is the default, but the serve resource can write config files to arbitrary paths independant of this.

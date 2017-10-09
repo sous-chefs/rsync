@@ -15,10 +15,22 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 #
-
+srv_provider = ::Chef::Platform::ServiceHelpers.service_resource_providers
+default['rsyncd']['init'] = if srv_provider.include?(:systemd)
+                              'systemd'
+                            else
+                              'sysvinit'
+                            end
 default['rsyncd']['service'] = case node['platform_family']
                                when 'rhel'
-                                 'rsyncd'
+                                 # Currently only RHEL platform allow the use
+                                 # of the systemd socket for rsyncd
+                                 case node['rsyncd']['init']
+                                 when 'systemd'
+                                   'rsyncd.socket'
+                                 when 'sysvinit'
+                                   'rsyncd'
+                                 end
                                when 'debian'
                                  'rsync'
                                else

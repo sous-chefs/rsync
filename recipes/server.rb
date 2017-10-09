@@ -26,6 +26,8 @@ when 'rhel'
     owner  'root'
     group  'root'
     mode   '0755'
+    # Redhat/CentOS 7 provide a systemd socket unit for rsyncd
+    not_if { node['rsyncd']['init'] == 'systemd' }
   end
 when 'debian'
   template '/etc/default/rsync' do
