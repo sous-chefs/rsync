@@ -20,6 +20,8 @@
 # we are not using inline resources on purpose here as it breaks
 # the accumulator pattern this cookbook implements
 
+use_inline_resources
+
 action :add do # ~FC017
   write_conf
 end
@@ -33,7 +35,7 @@ end
 # Build and write the config template
 #
 def write_conf
-  t = template(new_resource.config_path) do
+  template(new_resource.config_path) do
     source   'rsyncd.conf.erb'
     cookbook 'rsync'
     owner    'root'
@@ -45,8 +47,6 @@ def write_conf
     )
     notifies :restart, "service[#{node['rsyncd']['service']}]", :delayed
   end
-
-  new_resource.updated_by_last_action(t.updated?)
 
   service node['rsyncd']['service'] do
     action :nothing
@@ -99,8 +99,8 @@ end
 #
 # @return [Array<Chef::Resource>]
 def rsync_resources
-  run_context.resource_collection.select do |resource|
-    resource.is_a?(Chef::Resource::RsyncServe)
+  ::ObjectSpace.each_object(::Chef::Resource).select do |resource|
+    resource.resource_name == :rsync_serve
   end
 end
 
