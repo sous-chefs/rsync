@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the rsync cookbook.
 
+## 1.0.3 (2017-10-17)
+
+- Fix chef 13 compatibility
+
 ## 1.0.2 (2017-04-26)
 
 - Cookstyle fixes
