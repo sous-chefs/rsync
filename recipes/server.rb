@@ -27,6 +27,14 @@ when 'rhel'
     group  'root'
     mode   '0755'
   end
+when 'amazon'
+  # RedHat does not provide an init script for rsyncd
+  template '/etc/init.d/rsyncd' do
+    source 'rsync-init.erb'
+    owner  'root'
+    group  'root'
+    mode   '0755'
+  end
 when 'debian'
   template '/etc/default/rsync' do
     source 'rsync-defaults.erb'
