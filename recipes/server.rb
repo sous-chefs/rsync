@@ -19,15 +19,7 @@
 include_recipe 'rsync::default'
 
 case node['platform_family']
-when 'rhel'
-  # RedHat does not provide an init script for rsyncd
-  template '/etc/init.d/rsyncd' do
-    source 'rsync-init.erb'
-    owner  'root'
-    group  'root'
-    mode   '0755'
-  end
-when 'amazon'
+when 'rhel', 'amazon'
   # RedHat does not provide an init script for rsyncd
   template '/etc/init.d/rsyncd' do
     source 'rsync-init.erb'
