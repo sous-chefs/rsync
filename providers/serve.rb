@@ -20,13 +20,13 @@
 # we are not using inline resources on purpose here as it breaks
 # the accumulator pattern this cookbook implements
 
-use_inline_resources
+use_inline_resources # ~FC113
 
-action :add do # ~FC017
+action :add do
   write_conf
 end
 
-action :remove do # ~FC017
+action :remove do
   write_conf
 end
 
