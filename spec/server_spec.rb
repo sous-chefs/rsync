@@ -8,7 +8,7 @@ describe 'rsync::server' do
 
   context 'on rhel' do
     cached(:chef_run) do
-      ChefSpec::SoloRunner.new(platform: 'centos', version: '6.8').converge('rsync::server')
+      ChefSpec::SoloRunner.new(platform: 'centos', version: '6.9').converge('rsync::server')
     end
 
     it 'includes the default recipe' do
