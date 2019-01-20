@@ -1,4 +1,3 @@
-
 #
 # Cookbook:: rsync
 # Provider:: serve
