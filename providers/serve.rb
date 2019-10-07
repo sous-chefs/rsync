@@ -2,7 +2,7 @@
 # Cookbook:: rsync
 # Provider:: serve
 #
-# Copyright:: 2012-2016, Chef Software, Inc.
+# Copyright:: 2012-2019, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,8 +18,6 @@
 
 # we are not using inline resources on purpose here as it breaks
 # the accumulator pattern this cookbook implements
-
-use_inline_resources # ~FC113
 
 action :add do
   write_conf

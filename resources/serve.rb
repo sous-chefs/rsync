@@ -6,7 +6,6 @@
 #
 #
 
-actions :add, :remove
 default_action :add
 
 # man rsyncd.conf for more info on each attribute
