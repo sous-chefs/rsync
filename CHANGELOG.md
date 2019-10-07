@@ -2,6 +2,12 @@
 
 This file is used to list changes made in each version of the rsync cookbook.
 
+## 2.0.0 (2019-10-07)
+
+- Update specs to the latest platform versions - [@tas50](https://github.com/tas50)
+- Update the platforms we test - [@tas50](https://github.com/tas50)
+- Require Chef 13+ and resolve cookstyle warnings - [@tas50](https://github.com/tas50)
+
 ## 1.1.0 (2018-03-11)
 
 - Add Amazon linux compatibility for init script.
