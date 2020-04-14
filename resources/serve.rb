@@ -9,7 +9,7 @@
 default_action :add
 
 # man rsyncd.conf for more info on each attribute
-attribute :name, kind_of: String, name_attribute: true
+
 attribute :config_path, kind_of: String, default: '/etc/rsyncd.conf'
 attribute :path, kind_of: String, required: true
 attribute :comment, kind_of: String

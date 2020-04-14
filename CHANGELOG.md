@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the rsync cookbook.
 
+## Unreleased
+
+- resolved cookstyle error: resources/serve.rb:12:1 refactor: `ChefRedundantCode/UnnecessaryNameProperty`
+
 ## 2.0.0 (2019-10-07)
 
 - Update specs to the latest platform versions - [@tas50](https://github.com/tas50)
