@@ -2,6 +2,12 @@
 
 This file is used to list changes made in each version of the rsync cookbook.
 
+## 2.0.1 (2020-07-26)
+
+- Sort modules alphabetically to preserve idempotency - [@infertux](https://github.com/infertux)
+- Cookstyle fixes - [@tas50](https://github.com/tas50)
+- Standardise files with files in chef-cookbooks/repo-management - [@xorimabot](https://github.com/xorimabot)
+
 ## Unreleased
 
 - resolved cookstyle error: resources/serve.rb:12:1 refactor: `ChefRedundantCode/UnnecessaryNameProperty`
