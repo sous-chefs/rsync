@@ -6,7 +6,7 @@
 <% end -%>
 
 # Modules
-<% @modules.each_key do |mod| -%>
+<% @modules.keys.sort.each do |mod| -%>
 [<%= mod %>]
   <% @modules[mod].each do |key,value| -%>
     <%= key %> = <%= value %>
