@@ -2,6 +2,12 @@
 
 This file is used to list changes made in each version of the rsync cookbook.
 
+## 2.0.2 (2020-07-27)
+
+- Do not use kind_of in resource properties to fix failures - [@infertux](https://github.com/infertux)
+- Convert to a custom resource to resolve missing :remove action - [@tas50](https://github.com/tas50)
+- Test on Chef Infra Client 15 and 16 as well - [@tas50](https://github.com/tas50)
+
 ## 2.0.1 (2020-07-26)
 
 - Sort modules alphabetically to preserve idempotency - [@infertux](https://github.com/infertux)
