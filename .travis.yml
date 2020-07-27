@@ -18,70 +18,65 @@ services: docker
 
 env:
   matrix:
-  - CHEF_VERSION=16 INSTANCE=default-ubuntu-1604
-  - CHEF_VERSION=16 INSTANCE=default-ubuntu-1804
-  - CHEF_VERSION=16 INSTANCE=default-centos-7
-  - CHEF_VERSION=16 INSTANCE=default-centos-6
   - CHEF_VERSION=16 INSTANCE=simple-ubuntu-1604
   - CHEF_VERSION=16 INSTANCE=simple-ubuntu-1804
-  - CHEF_VERSION=16 INSTANCE=simple-centos-7
+  - CHEF_VERSION=16 INSTANCE=simple-ubuntu-2004
   - CHEF_VERSION=16 INSTANCE=simple-centos-6
+  - CHEF_VERSION=16 INSTANCE=simple-centos-7
+  - CHEF_VERSION=16 INSTANCE=simple-centos-8
   - CHEF_VERSION=16 INSTANCE=read-only-ubuntu-1604
   - CHEF_VERSION=16 INSTANCE=read-only-ubuntu-1804
-  - CHEF_VERSION=16 INSTANCE=read-only-centos-7
+  - CHEF_VERSION=16 INSTANCE=read-only-ubuntu-2004
   - CHEF_VERSION=16 INSTANCE=read-only-centos-6
+  - CHEF_VERSION=16 INSTANCE=read-only-centos-7
+  - CHEF_VERSION=16 INSTANCE=read-only-centos-8
   - CHEF_VERSION=16 INSTANCE=networking-ubuntu-1604
   - CHEF_VERSION=16 INSTANCE=networking-ubuntu-1804
-  - CHEF_VERSION=16 INSTANCE=networking-centos-7
   - CHEF_VERSION=16 INSTANCE=networking-centos-6
-  - CHEF_VERSION=15 INSTANCE=default-ubuntu-1604
-  - CHEF_VERSION=15 INSTANCE=default-ubuntu-1804
-  - CHEF_VERSION=15 INSTANCE=default-centos-7
-  - CHEF_VERSION=15 INSTANCE=default-centos-6
+  - CHEF_VERSION=16 INSTANCE=networking-centos-7
+  - CHEF_VERSION=16 INSTANCE=networking-centos-8
   - CHEF_VERSION=15 INSTANCE=simple-ubuntu-1604
   - CHEF_VERSION=15 INSTANCE=simple-ubuntu-1804
-  - CHEF_VERSION=15 INSTANCE=simple-centos-7
+  - CHEF_VERSION=15 INSTANCE=simple-ubuntu-2004
   - CHEF_VERSION=15 INSTANCE=simple-centos-6
+  - CHEF_VERSION=15 INSTANCE=simple-centos-7
+  - CHEF_VERSION=15 INSTANCE=simple-centos-8
   - CHEF_VERSION=15 INSTANCE=read-only-ubuntu-1604
   - CHEF_VERSION=15 INSTANCE=read-only-ubuntu-1804
-  - CHEF_VERSION=15 INSTANCE=read-only-centos-7
+  - CHEF_VERSION=15 INSTANCE=read-only-ubuntu-2004
   - CHEF_VERSION=15 INSTANCE=read-only-centos-6
+  - CHEF_VERSION=15 INSTANCE=read-only-centos-7
+  - CHEF_VERSION=15 INSTANCE=read-only-centos-8
   - CHEF_VERSION=15 INSTANCE=networking-ubuntu-1604
   - CHEF_VERSION=15 INSTANCE=networking-ubuntu-1804
-  - CHEF_VERSION=15 INSTANCE=networking-centos-7
+  - CHEF_VERSION=15 INSTANCE=networking-ubuntu-2004
   - CHEF_VERSION=15 INSTANCE=networking-centos-6
-  - CHEF_VERSION=14 INSTANCE=default-ubuntu-1604
-  - CHEF_VERSION=14 INSTANCE=default-ubuntu-1804
-  - CHEF_VERSION=14 INSTANCE=default-centos-7
-  - CHEF_VERSION=14 INSTANCE=default-centos-6
+  - CHEF_VERSION=15 INSTANCE=networking-centos-7
+  - CHEF_VERSION=15 INSTANCE=networking-centos-8
   - CHEF_VERSION=14 INSTANCE=simple-ubuntu-1604
   - CHEF_VERSION=14 INSTANCE=simple-ubuntu-1804
-  - CHEF_VERSION=14 INSTANCE=simple-centos-7
   - CHEF_VERSION=14 INSTANCE=simple-centos-6
+  - CHEF_VERSION=14 INSTANCE=simple-centos-7
   - CHEF_VERSION=14 INSTANCE=read-only-ubuntu-1604
   - CHEF_VERSION=14 INSTANCE=read-only-ubuntu-1804
-  - CHEF_VERSION=14 INSTANCE=read-only-centos-7
   - CHEF_VERSION=14 INSTANCE=read-only-centos-6
+  - CHEF_VERSION=14 INSTANCE=read-only-centos-7
   - CHEF_VERSION=14 INSTANCE=networking-ubuntu-1604
   - CHEF_VERSION=14 INSTANCE=networking-ubuntu-1804
-  - CHEF_VERSION=14 INSTANCE=networking-centos-7
   - CHEF_VERSION=14 INSTANCE=networking-centos-6
-  - CHEF_VERSION=13 INSTANCE=default-ubuntu-1604
-  - CHEF_VERSION=13 INSTANCE=default-ubuntu-1804
-  - CHEF_VERSION=13 INSTANCE=default-centos-7
-  - CHEF_VERSION=13 INSTANCE=default-centos-6
+  - CHEF_VERSION=14 INSTANCE=networking-centos-7
   - CHEF_VERSION=13 INSTANCE=simple-ubuntu-1604
   - CHEF_VERSION=13 INSTANCE=simple-ubuntu-1804
-  - CHEF_VERSION=13 INSTANCE=simple-centos-7
   - CHEF_VERSION=13 INSTANCE=simple-centos-6
+  - CHEF_VERSION=13 INSTANCE=simple-centos-7
   - CHEF_VERSION=13 INSTANCE=read-only-ubuntu-1604
   - CHEF_VERSION=13 INSTANCE=read-only-ubuntu-1804
-  - CHEF_VERSION=13 INSTANCE=read-only-centos-7
   - CHEF_VERSION=13 INSTANCE=read-only-centos-6
+  - CHEF_VERSION=13 INSTANCE=read-only-centos-7
   - CHEF_VERSION=13 INSTANCE=networking-ubuntu-1604
   - CHEF_VERSION=13 INSTANCE=networking-ubuntu-1804
-  - CHEF_VERSION=13 INSTANCE=networking-centos-7
   - CHEF_VERSION=13 INSTANCE=networking-centos-6
+  - CHEF_VERSION=13 INSTANCE=networking-centos-7
 
 before_script:
   - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables -N DOCKER )
