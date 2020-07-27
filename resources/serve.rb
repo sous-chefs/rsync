@@ -8,39 +8,39 @@
 
 default_action :add
 
-# man rsyncd.conf for more info on each attribute
+# man rsyncd.conf for more info on each property
 
-attribute :config_path, kind_of: String, default: '/etc/rsyncd.conf'
-attribute :path, kind_of: String, required: true
-attribute :comment, kind_of: String
-attribute :read_only, kind_of: [true, false]
-attribute :write_only, kind_of: [true, false]
-attribute :list, kind_of: [true, false]
-attribute :uid, kind_of: String
-attribute :gid, kind_of: String
-attribute :auth_users, kind_of: String
-attribute :secrets_file, kind_of: String
-attribute :hosts_allow, kind_of: String
-attribute :hosts_deny, kind_of: String
-attribute :max_connections, kind_of: Integer, default: 0
-attribute :munge_symlinks, kind_of: [TrueClass, FalseClass], default: true
-attribute :use_chroot, kind_of: [true, false]
-attribute :numeric_ids, kind_of: [TrueClass, FalseClass], default: true
-attribute :fake_super, kind_of: [true, false]
-attribute :exclude_from, kind_of: String
-attribute :exclude, kind_of: String
-attribute :include_from, kind_of: String
-attribute :include, kind_of: String
-attribute :strict_modes, kind_of: [true, false]
-attribute :log_file, kind_of: String
-attribute :log_format, kind_of: String
-attribute :transfer_logging, kind_of: [true, false]
+property :config_path, String, default: '/etc/rsyncd.conf'
+property :path, String, required: true
+property :comment, String
+property :read_only, [true, false]
+property :write_only, [true, false]
+property :list, [true, false]
+property :uid, String
+property :gid, String
+property :auth_users, String
+property :secrets_file, String
+property :hosts_allow, String
+property :hosts_deny, String
+property :max_connections, Integer, default: 0
+property :munge_symlinks, [true, false], default: true
+property :use_chroot, [true, false]
+property :numeric_ids, [true, false], default: true
+property :fake_super, [true, false]
+property :exclude_from, String
+property :exclude, String
+property :include_from, String
+property :include, String
+property :strict_modes, [true, false]
+property :log_file, String
+property :log_format, String
+property :transfer_logging, [true, false]
 # by default rsync sets no client timeout (lets client choose, but this is a trivial DOS) so we make a 10 minute one
-attribute :timeout, kind_of: Integer, default: 600
-attribute :dont_compress, kind_of: String
-attribute :lock_file, kind_of: String
-attribute :refuse_options, kind_of: String
-attribute :prexfer_exec, kind_of: String
-attribute :postxfer_exec, kind_of: String
-attribute :incoming_chmod, kind_of: String
-attribute :outgoing_chmod, kind_of: String
+property :timeout, Integer, default: 600
+property :dont_compress, String
+property :lock_file, String
+property :refuse_options, String
+property :prexfer_exec, String
+property :postxfer_exec, String
+property :incoming_chmod, String
+property :outgoing_chmod, String
