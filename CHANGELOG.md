@@ -16,6 +16,7 @@ This file is used to list changes made in each version of the rsync cookbook.
 
 ## Unreleased
 
+- resolved cookstyle error: spec/server_spec.rb:11:7 warning: `ChefDeprecations/DeprecatedChefSpecPlatform`
 - resolved cookstyle error: resources/serve.rb:12:1 refactor: `ChefRedundantCode/UnnecessaryNameProperty`
 
 ## 2.0.0 (2019-10-07)
