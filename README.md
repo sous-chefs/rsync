@@ -25,21 +25,17 @@ Rsync cookbook with rsyncd LWRP. More info on ryncd options can be found in the 
 
 ## Attributes
 
-`node['rsyncd']['service']` _(String) default: "rsync"_
-
-The name of the init service
-
 `node['rsyncd']['config']` _(Hash) default: "/etc/rsyncd.conf"_
 
 Path to the rsyncd config file. This is the default, but the serve resource can write config files to arbitrary paths independant of this.
 
-`node['rsyncd']['nice']` _(String) default: ""_ **Debian/ubuntu only**
-
-`node['rsyncd']['ionice']` _(String) default: ""_ **Debian/ubuntu only**
-
 `node['rsyncd']['globals']` _(Hash) default: {}_
 
 This is where you can store key-value pairs that coincide with rsyncd globals.
+
+`node['rsyncd']['options']` _(String) default: ''_
+
+Additional daemon arguments.
 
 - **motd file:** This parameter allows you to specify a "message of the day" to display to clients on each connect. This usually contains site information and any legal notices. The default is no motd file.
 - **pid file:** This parameter tells the rsync daemon to write its process ID to that file. If the file already exists, the rsync daemon will abort rather than overwrite the file.

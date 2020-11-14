@@ -22,9 +22,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Yamllint fixes
 - MDL fixes
 
+### Added
+
+- Management of systemd unit file
+- Add library helpers
+- Add `node['rsyncd']['options']` attribute for additional daemon arguments
+
 ### Removed
 
 - Remove testing for Amazon Linux 1 & CentOS 6
+- Remove support for init.d based systems
+- Remove the following attributes: `node['rsyncd']['service']`, `node['rsyncd']['nice']`, `node['rsyncd']['ionice']`
 
 ## 2.0.2 (2020-07-27)
 
