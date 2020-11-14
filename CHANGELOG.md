@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Yamllint fixes
+- MDL fixes
 
 ## 2.0.2 (2020-07-27)
 
@@ -56,6 +57,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update apache2 license string
 
 ## 1.0.1 (2016-09-18)
+
 - Clarify in readme we require Chef 12.1+
 - Update maintainer text
 - Disable use_inline_resources as it breaks the provider

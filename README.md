@@ -59,11 +59,11 @@ This LWRP implements a rsync server module. The folowing params are chef-only, t
 
 #### Parameters
 
-##### Required:
+##### Required
 
 - `path` - Path which this module should server
 
-##### Optional:
+##### Optional
 
 Unless specified these paramaters use the rsyncd default values as refed in the [Rsyncd docs][1]. Params are _Strings_ unless specified otherwise.
 
