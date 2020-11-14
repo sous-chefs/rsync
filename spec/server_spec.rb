@@ -15,23 +15,6 @@ describe 'rsync::server' do
       expect(chef_run).to include_recipe('rsync::default')
     end
 
-    context '/etc/init.d/rsyncd template' do
-      let(:template) { chef_run.template('/etc/init.d/rsyncd') }
-
-      it 'writes the template' do
-        expect(chef_run).to render_file('/etc/init.d/rsyncd').with_content('Rsyncd init script')
-      end
-
-      it 'is owned by root:root' do
-        expect(template.owner).to eq('root')
-        expect(template.group).to eq('root')
-      end
-
-      it 'has the correct permissions' do
-        expect(template.mode).to eq('0755')
-      end
-    end
-
     it 'starts and enables the rsync service' do
       expect(chef_run).to enable_service('rsyncd')
     end
@@ -52,15 +35,6 @@ describe 'rsync::server' do
       it 'writes the template' do
         expect(chef_run).to render_file('/etc/default/rsync').with_content('defaults file for rsync daemon mode')
       end
-
-      it 'is owned by root:root' do
-        expect(template.owner).to eq('root')
-        expect(template.group).to eq('root')
-      end
-
-      it 'has the correct permissions' do
-        expect(template.mode).to eq('0644')
-      end
     end
 
     it 'starts and enables the rsync service' do
@@ -74,23 +48,6 @@ describe 'rsync::server' do
 
     it 'includes the default recipe' do
       expect(chef_run).to include_recipe('rsync::default')
-    end
-
-    context '/etc/init.d/rsyncd template' do
-      let(:template) { chef_run.template('/etc/init.d/rsyncd') }
-
-      it 'writes the template' do
-        expect(chef_run).to render_file('/etc/init.d/rsyncd').with_content('Rsyncd init script')
-      end
-
-      it 'is owned by root:root' do
-        expect(template.owner).to eq('root')
-        expect(template.group).to eq('root')
-      end
-
-      it 'has the correct permissions' do
-        expect(template.mode).to eq('0755')
-      end
     end
 
     it 'starts and enables the rsync service' do
