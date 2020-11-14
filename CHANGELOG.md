@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update Changelog to Sous Chefs
 - Update to use Sous Chefs GH workflow
 
+### Fixed
+
+- Yamllint fixes
+
 ## 2.0.2 (2020-07-27)
 
 - Do not use kind_of in resource properties to fix failures - [@infertux](https://github.com/infertux)
