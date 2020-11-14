@@ -27,9 +27,21 @@ suites:
   - name: simple
     run_list:
       - recipe[test::simple]
+    verifier:
+      inspec_tests:
+        - name: rsync-integration-tests
+          path: test/integration/default
   - name: read-only
     run_list:
       - recipe[test::read_only]
+    verifier:
+      inspec_tests:
+        - name: rsync-integration-tests
+          path: test/integration/default
   - name: networking
     run_list:
       - recipe[test::networking]
+    verifier:
+      inspec_tests:
+        - name: rsync-integration-tests
+          path: test/integration/default
