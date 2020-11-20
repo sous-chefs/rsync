@@ -18,25 +18,30 @@
 
 include_recipe 'rsync::default'
 
-case node['platform_family']
-when 'rhel', 'amazon'
-  # Red Hat does not provide an init script for rsyncd
-  template '/etc/init.d/rsyncd' do
-    source 'rsync-init.erb'
-    owner  'root'
-    group  'root'
-    mode   '0755'
-  end
-when 'debian'
-  template '/etc/default/rsync' do
-    source 'rsync-defaults.erb'
-    owner  'root'
-    group  'root'
-    mode   '0644'
-  end
+systemd_unit 'rsync' do
+  content <<~EOU
+  [Unit]
+  Description=fast remote file copy program daemon
+  ConditionPathExists=#{node['rsyncd']['config']}
+
+  [Service]
+  EnvironmentFile=#{rsync_defaults_file}
+  ExecStart=/usr/bin/rsync --daemon --no-detach --config #{node['rsyncd']['config']} "$OPTIONS"
+
+  [Install]
+  WantedBy=multi-user.target
+  EOU
+  unit_name "#{rsync_service_name}.service"
+  notifies :restart, 'service[rsync]'
+  action :create
 end
 
-service node['rsyncd']['service'] do
-  action  [:enable, :start]
-  only_if { ::File.exist?(node['rsyncd']['config']) }
+template rsync_defaults_file do
+  source 'rsync-defaults.erb'
+  notifies :restart, 'service[rsync]'
+end
+
+service 'rsync' do
+  service_name rsync_service_name
+  action [:enable, :start]
 end

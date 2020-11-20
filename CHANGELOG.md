@@ -2,6 +2,38 @@
 
 This file is used to list changes made in each version of the rsync cookbook.
 
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## Unreleased
+
+### Changed
+
+- Sous Chefs Adoption
+- Update Changelog to Sous Chefs
+- Update to use Sous Chefs GH workflow
+- Update README to sous-chefs
+- Update metadata.rb to Sous Chefs
+- Update test-kitchen to Sous Chefs
+- Improve InSpec tests
+
+### Fixed
+
+- Yamllint fixes
+- MDL fixes
+
+### Added
+
+- Management of systemd unit file
+- Add library helpers
+- Add `node['rsyncd']['options']` attribute for additional daemon arguments
+
+### Removed
+
+- Remove testing for Amazon Linux 1 & CentOS 6
+- Remove support for init.d based systems
+- Remove the following attributes: `node['rsyncd']['service']`, `node['rsyncd']['nice']`, `node['rsyncd']['ionice']`
+
 ## 2.0.2 (2020-07-27)
 
 - Do not use kind_of in resource properties to fix failures - [@infertux](https://github.com/infertux)
@@ -41,6 +73,7 @@ This file is used to list changes made in each version of the rsync cookbook.
 - Update apache2 license string
 
 ## 1.0.1 (2016-09-18)
+
 - Clarify in readme we require Chef 12.1+
 - Update maintainer text
 - Disable use_inline_resources as it breaks the provider

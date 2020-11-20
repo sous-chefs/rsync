@@ -15,19 +15,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 #
-
-default['rsyncd']['service'] = case node['platform_family']
-                               when 'rhel'
-                                 'rsyncd'
-                               when 'debian'
-                                 'rsync'
-                               else
-                                 'rsyncd'
-                               end
-
 default['rsyncd']['config']  = '/etc/rsyncd.conf'
 default['rsyncd']['globals'] = {}
-
-# only used on debian platforms
-default['rsyncd']['nice'] = ''
-default['rsyncd']['ionice'] = ''
+default['rsyncd']['options'] = ''

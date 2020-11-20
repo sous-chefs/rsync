@@ -1,14 +1,17 @@
 name              'rsync'
-maintainer        'Chef Software, Inc.'
-maintainer_email  'cookbooks@chef.io'
+maintainer        'Sous Chefs'
+maintainer_email  'help@sous-chefs.org'
 license           'Apache-2.0'
 description       'Installs rsync'
-version '2.0.2'
+version           '2.0.2'
+source_url        'https://github.com/sous-chefs/rsync'
+issues_url        'https://github.com/sous-chefs/rsync/issues'
+chef_version      '>= 13'
 
-%w(amazon centos centos fedora oracle redhat scientific ubuntu).each do |os|
-  supports os
-end
-
-source_url 'https://github.com/chef-cookbooks/rsync'
-issues_url 'https://github.com/chef-cookbooks/rsync/issues'
-chef_version '>= 13'
+supports 'amazon'
+supports 'centos'
+supports 'fedora'
+supports 'oracle'
+supports 'redhat'
+supports 'scientific'
+supports 'ubuntu'

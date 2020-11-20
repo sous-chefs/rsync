@@ -66,10 +66,10 @@ action_class do
         globals: global_modules,
         modules: rsync_modules
       )
-      notifies :restart, "service[#{node['rsyncd']['service']}]", :delayed
+      notifies :restart, "service[#{rsync_service_name}]", :delayed
     end
 
-    service node['rsyncd']['service'] do
+    service rsync_service_name do
       action :nothing
     end
   end
