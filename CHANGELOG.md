@@ -7,7 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- Standardise files with files in sous-chefs/repo-management
+
 ## 3.1.1 - *2021-06-01*
+
+- Standardise files with files in sous-chefs/repo-management
 
 ## 3.1.0 - *2020-11-20*
 
