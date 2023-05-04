@@ -6,7 +6,7 @@ description       'Installs rsync'
 version           '3.1.5'
 source_url        'https://github.com/sous-chefs/rsync'
 issues_url        'https://github.com/sous-chefs/rsync/issues'
-chef_version      '>= 13'
+chef_version      '>= 15.3'
 
 supports 'amazon'
 supports 'centos'

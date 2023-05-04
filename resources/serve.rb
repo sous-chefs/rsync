@@ -1,10 +1,4 @@
-#
-# Rsync Server Module Resource
-#
-# Recipe:: rsync
-# Resource:: serve
-#
-#
+unified_mode true
 
 # man rsyncd.conf for more info on each property
 property :config_path, String, default: '/etc/rsyncd.conf'

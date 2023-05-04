@@ -7,9 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- Enable `unified_mode` and require Chef >= 15.3
+- Update and fix CI, tests and platforms
+- Update sous-chefs/.github action to v2
+- Update actions/checkout action to v3
+
 ## 3.1.5 - *2023-02-14*
 
+- Add renovate.json
+
 ## 3.1.4 - *2023-02-14*
+
+- Standardise files with files in sous-chefs/repo-management
 
 ## 3.1.3 - *2022-02-08*
 
@@ -141,18 +150,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Improvement
 
-- **[COOK-3580](https://tickets.chef.io/browse/COOK-3580)** - Add Test Kitchen, Specs, and Travis CI
+- Add Test Kitchen, Specs, and Travis CI
 
 ## v0.8.2
 
 ### Improvement
 
-- **[COOK-3153](https://tickets.chef.io/browse/COOK-3153)** - Add `refuse_options` parameter to `rsync_serve`
+- Add `refuse_options` parameter to `rsync_serve`
 
 ### Bug
 
-- **[COOK-2874](https://tickets.chef.io/browse/COOK-2874)** - Support chkconfig
-- **[COOK-2873](https://tickets.chef.io/browse/COOK-2873)** - Allow setting value to false in `rsyncd.conf`
+- Support chkconfig
+- Allow setting value to false in `rsyncd.conf`
 
 ## v0.8.0
 
