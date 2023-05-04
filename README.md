@@ -17,7 +17,7 @@ Rsync cookbook with rsyncd LWRP. More info on ryncd options can be found in the 
 
 ### Chef
 
-- Chef 13+
+- Chef >= 15.3
 
 ### Cookbooks
 
@@ -119,7 +119,7 @@ end
 
 Serve a directory with read only and specify uids:
 
-```
+```ruby
 include_recipe 'rsync::server'
 
 rsync_serve 'tmp' do
