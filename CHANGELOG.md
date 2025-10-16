@@ -5,190 +5,168 @@ This file is used to list changes made in each version of the rsync cookbook.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
-
-## 4.0.10 - *2025-09-04*
-
-## 4.0.9 - *2025-09-04*
-
-## 4.0.8 - *2024-05-06*
-
-## 4.0.7 - *2024-05-06*
-
-## 4.0.6 - *2023-12-27*
-
-## 4.0.5 - *2023-10-31*
-
-## 4.0.4 - *2023-09-28*
-
-## 4.0.3 - *2023-09-04*
-
-## 4.0.2 - *2023-07-10*
-
-## 4.0.1 - *2023-05-17*
-
 ## 4.0.0 - *2023-05-04*
 
-- Enable `unified_mode` and require Chef >= 15.3
-- Update and fix CI, tests and platforms
-- Update sous-chefs/.github action to v2
-- Update actions/checkout action to v3
+* Enable `unified_mode` and require Chef >= 15.3
+* Update and fix CI, tests and platforms
+* Update sous-chefs/.github action to v2
+* Update actions/checkout action to v3
 
 ## 3.1.5 - *2023-02-14*
 
-- Add renovate.json
+* Add renovate.json
 
 ## 3.1.4 - *2023-02-14*
 
-- Standardise files with files in sous-chefs/repo-management
+* Standardise files with files in sous-chefs/repo-management
 
 ## 3.1.3 - *2022-02-08*
 
-- Remove delivery folder
+* Remove delivery folder
 
 ## 3.1.2 - *2021-08-30*
 
-- Standardise files with files in sous-chefs/repo-management
+* Standardise files with files in sous-chefs/repo-management
 
 ## 3.1.1 - *2021-06-01*
 
-- Standardise files with files in sous-chefs/repo-management
+* Standardise files with files in sous-chefs/repo-management
 
 ## 3.1.0 - *2020-11-20*
 
-- Fixed issue with auto release system
+* Fixed issue with auto release system
 
 ## 3.0.0 - *2020-11-20*
 
 ### Changed
 
-- Sous Chefs Adoption
-- Update Changelog to Sous Chefs
-- Update to use Sous Chefs GH workflow
-- Update README to sous-chefs
-- Update metadata.rb to Sous Chefs
-- Update test-kitchen to Sous Chefs
-- Improve InSpec tests
+* Sous Chefs Adoption
+* Update Changelog to Sous Chefs
+* Update to use Sous Chefs GH workflow
+* Update README to sous-chefs
+* Update metadata.rb to Sous Chefs
+* Update test-kitchen to Sous Chefs
+* Improve InSpec tests
 
 ### Fixed
 
-- Yamllint fixes
-- MDL fixes
+* Yamllint fixes
+* MDL fixes
 
 ### Added
 
-- Management of systemd unit file
-- Add library helpers
-- Add `node['rsyncd']['options']` attribute for additional daemon arguments
+* Management of systemd unit file
+* Add library helpers
+* Add `node['rsyncd']['options']` attribute for additional daemon arguments
 
 ### Removed
 
-- Remove testing for Amazon Linux 1 & CentOS 6
-- Remove support for init.d based systems
-- Remove the following attributes: `node['rsyncd']['service']`, `node['rsyncd']['nice']`, `node['rsyncd']['ionice']`
+* Remove testing for Amazon Linux 1 & CentOS 6
+* Remove support for init.d based systems
+* Remove the following attributes: `node['rsyncd']['service']`, `node['rsyncd']['nice']`, `node['rsyncd']['ionice']`
 
 ## 2.0.2 (2020-07-27)
 
-- Do not use kind_of in resource properties to fix failures - [@infertux](https://github.com/infertux)
-- Convert to a custom resource to resolve missing :remove action - [@tas50](https://github.com/tas50)
-- Test on Chef Infra Client 15 and 16 as well - [@tas50](https://github.com/tas50)
+* Do not use kind_of in resource properties to fix failures - [@infertux](https://github.com/infertux)
+* Convert to a custom resource to resolve missing :remove action - [@tas50](https://github.com/tas50)
+* Test on Chef Infra Client 15 and 16 as well - [@tas50](https://github.com/tas50)
 
 ## 2.0.1 (2020-07-26)
 
-- Sort modules alphabetically to preserve idempotency - [@infertux](https://github.com/infertux)
-- Cookstyle fixes - [@tas50](https://github.com/tas50)
-- Standardise files with files in chef-cookbooks/repo-management - [@xorimabot](https://github.com/xorimabot)
+* Sort modules alphabetically to preserve idempotency - [@infertux](https://github.com/infertux)
+* Cookstyle fixes - [@tas50](https://github.com/tas50)
+* Standardise files with files in chef-cookbooks/repo-management - [@xorimabot](https://github.com/xorimabot)
 
 ## 3.0.0 - *2020-11-20*
 
-- resolved cookstyle error: spec/server_spec.rb:11:7 warning: `ChefDeprecations/DeprecatedChefSpecPlatform`
-- resolved cookstyle error: resources/serve.rb:12:1 refactor: `ChefRedundantCode/UnnecessaryNameProperty`
+* resolved cookstyle error: spec/server_spec.rb:11:7 warning: `ChefDeprecations/DeprecatedChefSpecPlatform`
+* resolved cookstyle error: resources/serve.rb:12:1 refactor: `ChefRedundantCode/UnnecessaryNameProperty`
 
 ## 2.0.0 (2019-10-07)
 
-- Update specs to the latest platform versions - [@tas50](https://github.com/tas50)
-- Update the platforms we test - [@tas50](https://github.com/tas50)
-- Require Chef 13+ and resolve cookstyle warnings - [@tas50](https://github.com/tas50)
+* Update specs to the latest platform versions - [@tas50](https://github.com/tas50)
+* Update the platforms we test - [@tas50](https://github.com/tas50)
+* Require Chef 13+ and resolve cookstyle warnings - [@tas50](https://github.com/tas50)
 
 ## 1.1.0 (2018-03-11)
 
-- Add Amazon linux compatibility for init script.
-- Remove the ChefSpec matchers. These are auto generated by modern ChefSpec/ChefDK
+* Add Amazon linux compatibility for init script.
+* Remove the ChefSpec matchers. These are auto generated by modern ChefSpec/ChefDK
 
 ## 1.0.3 (2017-10-17)
 
-- Fix chef 13 compatibility
+* Fix chef 13 compatibility
 
 ## 1.0.2 (2017-04-26)
 
-- Cookstyle fixes
-- Test with Local Delivery instead of Rake
-- Update apache2 license string
+* Cookstyle fixes
+* Test with Local Delivery instead of Rake
+* Update apache2 license string
 
 ## 1.0.1 (2016-09-18)
 
-- Clarify in readme we require Chef 12.1+
-- Update maintainer text
-- Disable use_inline_resources as it breaks the provider
-- Convert tests to use inspec
-- Moved all testing to the test recipe and removed the need for the apt cookbook in testing
+* Clarify in readme we require Chef 12.1+
+* Update maintainer text
+* Disable use_inline_resources as it breaks the provider
+* Convert tests to use inspec
+* Moved all testing to the test recipe and removed the need for the apt cookbook in testing
 
 ## 1.0.0 (2016-09-07)
 
-- Run integration tests in Travis CI with kitchen-dokken
-- Run chefspec and cookstyle in Travis
-- Add use_inline_resources to the provider
-- Require chef 12
+* Run integration tests in Travis CI with kitchen-dokken
+* Run chefspec and cookstyle in Travis
+* Add use_inline_resources to the provider
+* Require chef 12
 
 ## v0.8.9 (2015-10-05)
 
-- Fixed support for Chef 12.4.X and later
-- Added Chefspec matchers
-- Added additional platforms to Test Kitchen
-- Updated rubocop rules to our standard set and resolved all warnings
-- Updated Travis CI to test on additional Ruby versions
-- Updated contributing and testing docs
-- Added maintainers.toml and maintainers.md files
-- Added additional testing depedendencies to the Gemfile with version pinning
-- Added cookbook version and Travis CI badges to the readme
-- Clarified that Chef 11.0 is the minimum required Chef version for this cookbook
-- Removed outdated development information from the readme
-- Added a Rakefile for simplified testing
-- Added a chefignore file to limit what files are uploaded to the Chef server
-- Added Amazon Linux, Oracle, and Scientific Linux to the metadata Added source_url and issues_url to metadata.rb for Supermarket
-- Removed all pre-Ruby 1.9 hash rockets
+* Fixed support for Chef 12.4.X and later
+* Added Chefspec matchers
+* Added additional platforms to Test Kitchen
+* Updated rubocop rules to our standard set and resolved all warnings
+* Updated Travis CI to test on additional Ruby versions
+* Updated contributing and testing docs
+* Added maintainers.toml and maintainers.md files
+* Added additional testing depedendencies to the Gemfile with version pinning
+* Added cookbook version and Travis CI badges to the readme
+* Clarified that Chef 11.0 is the minimum required Chef version for this cookbook
+* Removed outdated development information from the readme
+* Added a Rakefile for simplified testing
+* Added a chefignore file to limit what files are uploaded to the Chef server
+* Added Amazon Linux, Oracle, and Scientific Linux to the metadata Added source_url and issues_url to metadata.rb for Supermarket
+* Removed all pre-Ruby 1.9 hash rockets
 
 ## v0.8.8 (2015-05-07)
 
-- [#15] Add incoming/outgoing chmod options
-- [#16] Add prexfer/postxfer exec commands
-- [#14,#17] Support Chef 12
+* [#15] Add incoming/outgoing chmod options
+* [#16] Add prexfer/postxfer exec commands
+* [#14,#17] Support Chef 12
 
 ## v0.8.6 (2014-09-30)
 
-- [#11] Fixes to allow rsync daemon to be started if not up.
+* [#11] Fixes to allow rsync daemon to be started if not up.
 
 ## v0.8.4
 
 ### Improvement
 
-- Add Test Kitchen, Specs, and Travis CI
+* Add Test Kitchen, Specs, and Travis CI
 
 ## v0.8.2
 
 ### Improvement
 
-- Add `refuse_options` parameter to `rsync_serve`
+* Add `refuse_options` parameter to `rsync_serve`
 
 ### Bug
 
-- Support chkconfig
-- Allow setting value to false in `rsyncd.conf`
+* Support chkconfig
+* Allow setting value to false in `rsyncd.conf`
 
 ## v0.8.0
 
-- [COOK-878] - Add LWRP for rsyncd.conf and server recipe
+* [COOK-878] - Add LWRP for rsyncd.conf and server recipe
 
 ## v0.7.0
 
-- Initial released version
+* Initial released version
