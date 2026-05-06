@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 control 'networking' do
   # rsync is serving /data/repos/prod/centos
   describe command 'rsync rsync://127.0.0.1' do

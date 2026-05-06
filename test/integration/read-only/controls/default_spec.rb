@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 control 'read-only' do
   # rsync is serving /tmp
   describe command('rsync rsync://127.0.0.1') do
@@ -8,6 +10,6 @@ control 'read-only' do
   describe ini '/etc/rsyncd.conf' do
     its('tmp.read only') { should cmp 'true' }  # rsync is readonly
     its('tmp.uid') { should cmp 'nobody' }      # rsync is using nobody:nobody
-    its('tmp.gid') { should cmp 'nobody' }      # rsync is using nobody:nobodyend
+    its('tmp.gid') { should cmp 'nobody' }      # rsync is using nobody:nobody
   end
 end

@@ -6,111 +6,97 @@
 [![OpenCollective](https://opencollective.com/sous-chefs/sponsors/badge.svg)](#sponsors)
 [![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](https://opensource.org/licenses/Apache-2.0)
 
-Rsync cookbook with rsyncd LWRP. More info on ryncd options can be found in the [Docs](http://www.samba.org/ftp/rsync/rsyncd.conf.html).
+Rsync cookbook with custom resources for installing rsync and managing rsyncd modules. More info on rsyncd options can be found in the [Docs](https://download.samba.org/pub/rsync/rsyncd.conf.5).
+
+## Migration
+
+This release removes the legacy recipes and attributes. See [migration.md](migration.md) for the resource migration guide.
 
 ## Requirements
 
 ### Platforms
 
-- Debian/Ubuntu
-- RHEL/CentOS/Scientific/Amazon/Oracle
+* AlmaLinux 8+
+* Amazon Linux 2023+
+* CentOS Stream 9+
+* Debian 12+
+* Fedora
+* Oracle Linux 8+
+* Red Hat Enterprise Linux 8+
+* Rocky Linux 8+
+* Ubuntu 22.04+
 
 ### Chef
 
 - Chef >= 15.3
 
-### Cookbooks
+## Resources
 
-- none
-
-## Attributes
-
-`node['rsyncd']['config']` _(Hash) default: "/etc/rsyncd.conf"_
-
-Path to the rsyncd config file. This is the default, but the serve resource can write config files to arbitrary paths independant of this.
-
-`node['rsyncd']['globals']` _(Hash) default: {}_
-
-This is where you can store key-value pairs that coincide with rsyncd globals.
-
-`node['rsyncd']['options']` _(String) default: ''_
-
-Additional daemon arguments.
-
-- **motd file:** This parameter allows you to specify a "message of the day" to display to clients on each connect. This usually contains site information and any legal notices. The default is no motd file.
-- **pid file:** This parameter tells the rsync daemon to write its process ID to that file. If the file already exists, the rsync daemon will abort rather than overwrite the file.
-- **port:** You can override the default port the daemon will listen on by specifying this value (defaults to 873). This is ignored if the daemon is being run by inetd, and is superseded by the --port command-line option.
-- **address:** You can override the default IP address the daemon will listen on by specifying this value. This is ignored if the daemon is being run by inetd, and is superseded by the --address command-line option.
-- **socket options:** This parameter can provide endless fun for people who like to tune their systems to the utmost degree. You can set all sorts of socket options which may make transfers faster (or slower!). Read the man page for the setsockopt() system call for details on some of the options you may be able to set. By default no special socket options are set. These settings can also be specified via the --sockopts command-line option.
-
-Refer to the documentation for rsyncd for more info.
-
-## Recipes
-
-### default
-
-This recipe simply installs the rsync package, nothing more.
-
-## Resources/Providers
+* [rsync_install](documentation/rsync_install.md)
+* [rsync_service](documentation/rsync_service.md)
+* [rsync_serve](documentation/rsync_serve.md)
 
 ### serve
 
-This LWRP implements a rsync server module. The folowing params are chef-only, the rest implement the feature as described in the [rsyncd docs][1]
+This resource implements an rsync server module. The following params are chef-only, the rest implement the feature as described in the [rsyncd docs][1].
 
 #### Parameters
 
 ##### Required
 
-- `path` - Path which this module should server
+* `path` - Path which this module should serve.
 
 ##### Optional
 
-Unless specified these paramaters use the rsyncd default values as refed in the [Rsyncd docs][1]. Params are _Strings_ unless specified otherwise.
+Unless specified these parameters use the rsyncd default values as referenced in the [Rsyncd docs][1]. Params are _Strings_ unless specified otherwise.
 
-- `name` - The name of this module that will be refrenced by rsync://foo/NAME. Defaults to the resource name.
-- `config_path` - Path to write the rsyncd config Defaults to `node['rsyncd']['config']
-- `comment` - Comment when rsync gets the list of modules from the server.
-- `read_only` - _Boolean_ - Serve this as a read-only module.
-- `write_only`- _Boolean_ - Serve this as a write-only module.
-- `list` - _Boolean_ - Add this module the the rsync modules list
-- `uid` - _String_ - This parameter specifies the user name or user ID that file transfers to and from that module should take place as when the daemon was run as root.
-- `gid` - _String_ - This parameter specifies the group name or group ID that file transfers to and from that module should take place as when the daemon was run as root.
-- `auth_users` - This parameter specifies a comma and space-separated list of usernames that will be allowed to connect to this module. [more info][1]
-- `secrets_file` - This parameter specifies the name of a file that contains the username:password pairs used for authenticating this module. [more info][1]
-- `hosts_allow` - This parameter allows you to specify a list of patterns that are matched against a connecting clients hostname and IP address. If none of the patterns match then the connection is rejected. [more info][1]
-- `hosts_deny` - This parameter allows you to specify a list of patterns that are matched against a connecting clients hostname and IP address. If the pattern matches then the connection is rejected. [more info][1]
-- `max_connections` - _Fixnum_ - *Default: `0` - The maximum number of simultaneous connections you will allow.
-- `munge_symlinks` - _Boolean_ - *Default: `true` - This parameter tells rsync to modify all incoming symlinks in a way that makes them unusable but recoverable. [more info][1]
-- `use_chroot` - _Boolean_ - the rsync daemon will chroot to the "path" before starting the file transfer with the client.
-- `nemeric_ids` - _Boolean_ - *Default: `true` - Enabling this parameter disables the mapping of users and groups by name for the current daemon module.
-- `fake_super` - _Boolean_ - This allows the full attributes of a file to be stored without having to have the daemon actually running as root.
-- `exclude_from` - This parameter specifies the name of a file on the daemon that contains daemon exclude patterns. [more info][1]
-- `exclude` - This parameter specifies the name of a file on the daemon that contains daemon exclude patterns. [more info][1]
-- `include_from` - Analogue of `exclude_from`
-- `include` - Analogue of `exclude`
-- `strict_modes` - _Boolean_ - If true, then the secrets file must not be readable by any user ID other than the one that the rsync daemon is running under.
-- `log_file` - Path where you should store this modules log file.
-- `log_format` - The format is a text string containing embedded single-character escape sequences prefixed with a percent (%) character. An optional numeric field width may also be specified between the percent and the escape letter (e.g. "%-50n %8l %07p"). [more info][1]
-- `transfer_logging` - This parameter enables per-file logging of downloads and uploads in a format somewhat similar to that used by ftp daemons. The daemon always logs the transfer at the end, so if a transfer is aborted, no mention will be made in the log file.
-- `timeout` - _Fixnum_ - Default: `600` - Using this parameter you can ensure that rsync won't wait on a dead client forever. The timeout is specified in seconds. A value of zero means no timeout.
-- `dont_compress` - This parameter allows you to select filenames based on wildcard patterns that should not be compressed when pulling files from the daemon
-- `lock_file` - This parameter specifies the file to use to support the "max connections" parameter. The rsync daemon uses record locking on this file to ensure that the max connections limit is not exceeded for the modules sharing the lock file. The default is /var/run/rsyncd.lock
-- `refuse_options` - This parameter allows you to specify a space-separated list of rsync command line options that will be refused by your rsync daemon.
-- `prexfer_exec` - A command to run before each transfer to or from this module. If this command fails, the transfer will be aborted.
-- `postxfer_exec` - A command to run after each transfer to or from this module.
+* `name` - The name of this module that will be referenced by rsync://foo/NAME. Defaults to the resource name.
+* `config_path` - Path to write the rsyncd config. Defaults to `/etc/rsyncd.conf`.
+* `globals` - Hash of global rsyncd directives for the config file.
+* `service_name` - Service to notify when the config changes.
+* `comment` - Comment when rsync gets the list of modules from the server.
+* `read_only` - _Boolean_ - Serve this as a read-only module.
+* `write_only` - _Boolean_ - Serve this as a write-only module.
+* `list` - _Boolean_ - Add this module the the rsync modules list.
+* `uid` - _String_ - User name or user ID that file transfers use when the daemon runs as root.
+* `gid` - _String_ - Group name or group ID that file transfers use when the daemon runs as root.
+* `auth_users` - Comma and space-separated list of usernames allowed to connect to this module. [more info][1]
+* `secrets_file` - File containing username:password pairs for authenticating this module. [more info][1]
+* `hosts_allow` - Hostname and IP patterns allowed to connect. [more info][1]
+* `hosts_deny` - Hostname and IP patterns denied from connecting. [more info][1]
+* `max_connections` - _Integer_ - *Default: `0` - The maximum number of simultaneous connections.
+* `munge_symlinks` - _Boolean_ - *Default: `true` - Modify incoming symlinks in a safe, recoverable way. [more info][1]
+* `use_chroot` - _Boolean_ - Chroot to the module path before starting file transfer.
+* `numeric_ids` - _Boolean_ - *Default: `true` - Disable user/group name mapping for the module.
+* `fake_super` - _Boolean_ - Store full file attributes without running the daemon as root.
+* `exclude_from` - File containing daemon exclude patterns. [more info][1]
+* `exclude` - Daemon exclude patterns. [more info][1]
+* `include_from` - Analogue of `exclude_from`.
+* `include` - Analogue of `exclude`.
+* `strict_modes` - _Boolean_ - Require the secrets file to be readable only by the daemon user ID.
+* `log_file` - Module log file path.
+* `log_format` - Per-transfer log format. [more info][1]
+* `transfer_logging` - Enables per-file logging of downloads and uploads.
+* `timeout` - _Integer_ - Default: `600` - Client timeout in seconds.
+* `dont_compress` - Filename patterns that should not be compressed.
+* `lock_file` - Lock file used to support `max_connections`.
+* `refuse_options` - Space-separated list of refused rsync command-line options.
+* `prexfer_exec` - Command to run before each transfer to or from this module.
+* `postxfer_exec` - Command to run after each transfer to or from this module.
 
 ## Usage
 
 After loading the rsync cookbook you have access to the `rsync_serve` resource for serving up a generic rsyncd module with many options.
 
-**You must include the `rsync::server` recipe before you can use the LWRP** as shown in the examples below.
+Declare `rsync_install` and `rsync_service` before `rsync_serve` when managing a daemon.
 
 ### Examples
 
 Serve a directory:
 
 ```ruby
-include_recipe 'rsync::server'
+rsync_install 'default'
+rsync_service 'default'
 
 rsync_serve 'tmp' do
   path '/tmp'
@@ -120,7 +106,8 @@ end
 Serve a directory with read only and specify uids:
 
 ```ruby
-include_recipe 'rsync::server'
+rsync_install 'default'
+rsync_service 'default'
 
 rsync_serve 'tmp' do
   path      '/tmp'
@@ -133,7 +120,8 @@ end
 A more complex example with networking:
 
 ```ruby
-include_recipe 'rsync::server'
+rsync_install 'default'
+rsync_service 'default'
 
 rsync_serve 'centos-prod' do
   path             '/data/repos/prod/centos'

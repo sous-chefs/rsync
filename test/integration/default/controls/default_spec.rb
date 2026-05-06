@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 control 'default' do
   service_name = os.family == 'debian' ? 'rsync' : 'rsyncd'
   describe package 'rsync' do
@@ -11,5 +13,10 @@ control 'default' do
 
   describe port 873 do
     it { should be_listening }
+  end
+
+  describe ini '/etc/rsyncd.conf' do
+    its('foo.path') { should cmp '/foo' }
+    its('tmp.path') { should cmp '/tmp' }
   end
 end
