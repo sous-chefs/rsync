@@ -28,7 +28,7 @@ This release removes the legacy recipes and attributes. See [migration.md](migra
 
 ### Chef
 
-- Chef >= 15.3
+* Chef >= 15.3
 
 ## Resources
 

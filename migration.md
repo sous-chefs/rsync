@@ -38,11 +38,9 @@ rsync_service 'default'
 
 ## Attribute Replacements
 
-| Removed attribute              | Replacement property                  |
-|--------------------------------|---------------------------------------|
-| `node['rsyncd']['config']`     | `config_path` on `rsync_service` and `rsync_serve` |
-| `node['rsyncd']['globals']`    | `globals` on `rsync_serve`            |
-| `node['rsyncd']['options']`    | `options` on `rsync_service`          |
+* `node['rsyncd']['config']` maps to `config_path` on `rsync_service` and `rsync_serve`.
+* `node['rsyncd']['globals']` maps to `globals` on `rsync_serve`.
+* `node['rsyncd']['options']` maps to `options` on `rsync_service`.
 
 ## Examples
 

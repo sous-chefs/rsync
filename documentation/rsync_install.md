@@ -4,18 +4,14 @@ Installs or removes the rsync package.
 
 ## Actions
 
-| Action     | Description                                  |
-|------------|----------------------------------------------|
-| `:install` | Installs the rsync package. Default action.  |
-| `:create`  | Alias for `:install`.                        |
-| `:remove`  | Removes the rsync package.                   |
-| `:delete`  | Alias for `:remove`.                         |
+* `:install` - Installs the rsync package. Default action.
+* `:create` - Alias for `:install`.
+* `:remove` - Removes the rsync package.
+* `:delete` - Alias for `:remove`.
 
 ## Properties
 
-| Property       | Type            | Default   | Description                  |
-|----------------|-----------------|-----------|------------------------------|
-| `package_name` | String or Array | `'rsync'` | Package name or names to use. |
+* `package_name` - String or Array, default `'rsync'`. Package name or names to use.
 
 ## Examples
 

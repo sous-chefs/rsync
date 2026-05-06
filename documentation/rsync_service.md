@@ -4,22 +4,18 @@ Creates and manages the systemd rsync daemon service.
 
 ## Actions
 
-| Action     | Description                                                |
-|------------|------------------------------------------------------------|
-| `:create`  | Writes the systemd unit/defaults file and enables service. |
-| `:delete`  | Stops/disables service and removes service artifacts.      |
-| `:start`   | Starts the service.                                        |
-| `:stop`    | Stops the service.                                         |
-| `:restart` | Restarts the service.                                      |
+* `:create` - Writes the systemd unit/defaults file and enables service.
+* `:delete` - Stops/disables service and removes service artifacts.
+* `:start` - Starts the service.
+* `:stop` - Stops the service.
+* `:restart` - Restarts the service.
 
 ## Properties
 
-| Property        | Type   | Default             | Description                                      |
-|-----------------|--------|---------------------|--------------------------------------------------|
-| `config_path`   | String | `'/etc/rsyncd.conf'`| Path passed to `rsync --daemon --config`.        |
-| `defaults_file` | String | Platform default    | Service environment file path.                   |
-| `options`       | String | `''`                | Additional daemon command-line options.          |
-| `service_name`  | String | Platform default    | Service name, `rsync` on Debian and `rsyncd` elsewhere. |
+* `config_path` - String, default `'/etc/rsyncd.conf'`. Path passed to `rsync --daemon --config`.
+* `defaults_file` - String, platform default. Service environment file path.
+* `options` - String, default `''`. Additional daemon command-line options.
+* `service_name` - String, platform default. Service name, `rsync` on Debian and `rsyncd` elsewhere.
 
 ## Examples
 

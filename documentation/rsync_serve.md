@@ -4,12 +4,10 @@ Adds or removes an rsync daemon module from an rsyncd configuration file.
 
 ## Actions
 
-| Action    | Description                                          |
-|-----------|------------------------------------------------------|
-| `:create` | Adds the module to the rendered config. Default action. |
-| `:add`    | Backwards-compatible alias for `:create`.          |
-| `:delete` | Removes the module from the rendered config.        |
-| `:remove` | Backwards-compatible alias for `:delete`.           |
+* `:create` - Adds the module to the rendered config. Default action.
+* `:add` - Backwards-compatible alias for `:create`.
+* `:delete` - Removes the module from the rendered config.
+* `:remove` - Backwards-compatible alias for `:delete`.
 
 ## Properties
 
