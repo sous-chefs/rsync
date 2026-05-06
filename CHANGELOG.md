@@ -5,6 +5,22 @@ This file is used to list changes made in each version of the rsync cookbook.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.0.0](https://github.com/sous-chefs/rsync/compare/v4.0.11...v5.0.0) (2026-05-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate rsync to custom resources ([#79](https://github.com/sous-chefs/rsync/issues/79))
+
+### Features
+
+* migrate rsync to custom resources ([#79](https://github.com/sous-chefs/rsync/issues/79)) ([159d52f](https://github.com/sous-chefs/rsync/commit/159d52f518bc373196ac965c3e1f35d9ee25cf17))
+
+
+### Bug Fixes
+
+* **ci:** Update workflows to use release pipeline ([#74](https://github.com/sous-chefs/rsync/issues/74)) ([70f90c7](https://github.com/sous-chefs/rsync/commit/70f90c7ae26ea546659314d07ccedc30fec0ac91))
+
 ## [4.0.11](https://github.com/sous-chefs/rsync/compare/4.0.10...v4.0.11) (2025-10-16)
 
 
