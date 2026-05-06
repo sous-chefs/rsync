@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Rsync
   module Cookbook
     module Helpers
@@ -19,5 +21,3 @@ module Rsync
     end
   end
 end
-Chef::DSL::Recipe.include ::Rsync::Cookbook::Helpers
-Chef::Resource.include ::Rsync::Cookbook::Helpers

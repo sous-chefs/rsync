@@ -1,6 +1,10 @@
+# frozen_string_literal: true
+
 apt_update 'update' if platform_family?('debian')
 
-include_recipe 'rsync::server'
+rsync_install 'default'
+
+rsync_service 'default'
 
 rsync_serve 'foo' do
   path '/foo'

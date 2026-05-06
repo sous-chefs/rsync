@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 control 'simple' do
   # rsync is serving /foo and /tmp alphabetically
   describe command 'rsync rsync://127.0.0.1' do

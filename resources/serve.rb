@@ -1,7 +1,12 @@
+# frozen_string_literal: true
+
+provides :rsync_serve
 unified_mode true
 
 # man rsyncd.conf for more info on each property
 property :config_path, String, default: '/etc/rsyncd.conf'
+property :globals, Hash, default: {}
+property :service_name, String
 property :path, String, required: true
 property :comment, String
 property :read_only, [true, false]
@@ -36,7 +41,17 @@ property :postxfer_exec, String
 property :incoming_chmod, String
 property :outgoing_chmod, String
 
+default_action :create
+
+action :create do
+  write_conf
+end
+
 action :add do
+  write_conf
+end
+
+action :delete do
   write_conf
 end
 
@@ -45,6 +60,8 @@ action :remove do
 end
 
 action_class do
+  include Rsync::Cookbook::Helpers
+
   #
   # Walk collection for :add rsync_serve resources
   # Build and write the config template
@@ -60,10 +77,10 @@ action_class do
         globals: global_modules,
         modules: rsync_modules
       )
-      notifies :restart, "service[#{rsync_service_name}]", :delayed
+      notifies :restart, "service[#{resolved_service_name}]", :delayed
     end
 
-    service rsync_service_name do
+    service resolved_service_name do
       action :nothing
     end
   end
@@ -114,7 +131,7 @@ action_class do
   #
   # @return [Array<Chef::Resource>]
   def rsync_resources
-    ::ObjectSpace.each_object(::Chef::Resource).select do |resource|
+    new_resource.run_context.resource_collection.select do |resource|
       resource.resource_name == :rsync_serve
     end
   end
@@ -151,10 +168,8 @@ action_class do
   # @return [Hash]
   def rsync_modules
     rsync_resources.each_with_object({}) do |resource, hash|
-      next unless resource.config_path == new_resource.config_path && (
-        resource.action == :add ||
-        resource.action.include?(:add)
-      )
+      next unless resource.config_path == new_resource.config_path && create_action?(resource)
+
       hash[resource.name] ||= {}
       resource_attributes.each do |key|
         value = resource.send(key)
@@ -168,8 +183,20 @@ action_class do
   #
   # @return [Hash]
   def global_modules
-    node['rsyncd']['globals'].each_with_object({}) do |(key, value), hash|
-      hash[attribute_to_directive(key)] = value unless value.nil?
+    rsync_resources.each_with_object({}) do |resource, hash|
+      next unless resource.config_path == new_resource.config_path
+
+      resource.globals.each do |key, value|
+        hash[attribute_to_directive(key)] = value unless value.nil?
+      end
     end
+  end
+
+  def create_action?(resource)
+    Array(resource.action).any? { |action| %i(create add).include?(action) }
+  end
+
+  def resolved_service_name
+    new_resource.service_name || rsync_service_name
   end
 end
