@@ -54,14 +54,18 @@ x-verifiers:
 
 suites:
   - name: default
+    named_run_list: default
     run_list: *default_run_list
     verifier: *default_verifier
   - name: simple
+    named_run_list: simple
     run_list: *simple_run_list
     verifier: *simple_verifier
   - name: read-only
+    named_run_list: read_only
     run_list: *read_only_run_list
     verifier: *read_only_verifier
   - name: networking
+    named_run_list: networking
     run_list: *networking_run_list
     verifier: *networking_verifier
